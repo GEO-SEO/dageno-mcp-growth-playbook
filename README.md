@@ -5,9 +5,12 @@
 
 # Dageno MCP Growth Playbook
 
-![Dageno MCP Growth Playbook Cover](assets/cover.svg)
+![Dageno MCP Growth Playbook Cover](assets/cover-v2.svg)
 
 > Turn Dageno MCP and Open API data into GEO reports, citation intelligence, prompt-gap audits, content queues, backlink targets, and community workflows.
+
+This repo does **not** include a shared Dageno project or a shared API key.
+Each user connects their **own** Dageno project and **own** `x-api-key`.
 
 **Positioning**
 
@@ -65,7 +68,7 @@ In plain English:
 ## What This Repo Includes
 
 - a GitHub-first `README.md` with positioning, use cases, setup, and examples
-- a readable export map in [`assets/data-map.svg`](assets/data-map.svg)
+- a readable export map in [`assets/data-map-v2.svg`](assets/data-map-v2.svg)
 - a lightweight client in [`src/dageno_mcp_growth_playbook/client.py`](src/dageno_mcp_growth_playbook/client.py)
 - reusable workflows in [`src/dageno_mcp_growth_playbook/workflows.py`](src/dageno_mcp_growth_playbook/workflows.py)
 - a CLI in [`src/dageno_mcp_growth_playbook/cli.py`](src/dageno_mcp_growth_playbook/cli.py)
@@ -88,7 +91,7 @@ The Dageno MCP / Open API exposes data across these layers:
 
 ## Data Export Map
 
-![Dageno Export Map](assets/data-map.svg)
+![Dageno Export Map](assets/data-map-v2.svg)
 
 ## What You Can Build From The Data
 
@@ -112,6 +115,7 @@ Sample window:
 - last `30` days
 - project: `Dageno`
 - generated from the included CLI workflows
+- requires a Dageno project with accessible data
 
 Observed themes from a sample run:
 
@@ -192,6 +196,17 @@ claude mcp add --transport http dageno https://api.dageno.ai/mcp \
 
 Use [`examples/cursor-mcp.json`](examples/cursor-mcp.json).
 
+## Who Needs What
+
+To use this project, a customer needs:
+
+- a Dageno project
+- an API key for that project
+- enough project data for topics, prompts, citations, and opportunities to return useful results
+
+This repo is the wrapper and workflow layer.
+It is not a public demo dataset.
+
 ## Example MCP Prompts
 
 ```text
@@ -248,7 +263,9 @@ dageno-mcp-growth-playbook/
 ├── pyproject.toml
 ├── assets/
 │   ├── cover.svg
-│   └── data-map.svg
+│   ├── cover-v2.svg
+│   ├── data-map.svg
+│   └── data-map-v2.svg
 ├── examples/
 │   ├── brand-snapshot.md
 │   ├── cursor-mcp.json
