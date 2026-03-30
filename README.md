@@ -7,143 +7,161 @@
 
 ![Dageno MCP Growth Playbook Cover](assets/cover.svg)
 
-> Turn Dageno Open API and MCP data into GEO reporting, citation intelligence, prompt-gap analysis, content opportunity queues, backlink targets, and community distribution workflows.
+> Turn Dageno MCP and Open API data into GEO reports, citation intelligence, prompt-gap audits, content queues, backlink targets, and community workflows.
 
 **Positioning**
 
-`Dageno MCP Growth Playbook` is a GitHub-ready project for operators who want more than API docs.
+`Dageno MCP Growth Playbook` is a public-facing project for teams that want to do more than read API docs.
 
-It packages the Dageno Open API and MCP server into a practical growth workflow that helps teams:
+It turns the Dageno API surface into a usable GEO operating layer:
 
-- understand what data Dageno exposes
-- turn raw GEO metrics into readable reports
-- connect prompts, citations, and opportunities into execution logic
-- build lightweight internal tools, dashboards, and AI-agent workflows
-- create a public-facing project that is both useful and discoverable for SEO / GEO audiences
+- a readable explainer for founders, agencies, and operators
+- a visual map of what data can be exported
+- a concrete example based on real Dageno output
+- a lightweight Python client
+- simple workflows you can run, demo, extend, or plug into agents
 
-This repo is designed to answer a practical question:
+This repo is built to answer a practical question:
 
-> If I have Dageno MCP and Open API access, what exactly can I export, and how do I turn it into a repeatable GEO operating system?
+> If I already have Dageno access, how do I turn it into something a team can actually use, share, and build on?
 
-**Outcome**
+## The Problem
 
-Instead of leaving the docs as a set of endpoints, this project turns them into:
-
-- one public explanation layer
-- one visual export map
-- one concrete example
-- one lightweight Python client
-- multiple simple workflows that can be reused, extended, or demoed
-
-## What This Repo Includes
-
-- a GitHub-friendly `README.md` with positioning, examples, and setup
-- a visual export map in [`assets/data-map.svg`](assets/data-map.svg)
-- a lightweight Python client in [`src/dageno_mcp_growth_playbook/client.py`](src/dageno_mcp_growth_playbook/client.py)
-- simple workflow implementations in [`src/dageno_mcp_growth_playbook/workflows.py`](src/dageno_mcp_growth_playbook/workflows.py)
-- a CLI in [`src/dageno_mcp_growth_playbook/cli.py`](src/dageno_mcp_growth_playbook/cli.py)
-- ready-to-copy MCP config in [`examples/cursor-mcp.json`](examples/cursor-mcp.json)
-- sample outputs in [`examples/brand-snapshot.md`](examples/brand-snapshot.md) and [`examples/weekly-growth-brief.md`](examples/weekly-growth-brief.md)
-
-## Why It Feels Different
-
-Most API wrappers stop at:
+Most API projects stop at:
 
 - endpoint lists
 - auth instructions
-- a few cURL examples
+- a few request examples
 
-That is not enough for GEO teams, SEO operators, agencies, or founders who need to answer:
+That is not enough for SEO and GEO operators who need to decide:
 
 - which topics matter most right now
-- which prompts are high-value but under-covered
-- which sources dominate AI citation graphs
-- what content should be created next
-- what backlink or community opportunities deserve attention
+- which prompts are worth chasing
+- which domains dominate the citation graph
+- what content should be published next
+- what outreach or community actions deserve priority
 
-This project is built to bridge:
+## The Promise
 
-- `docs -> data -> workflows -> execution`
+This repo bridges:
+
+- `docs -> exports -> analysis -> workflows -> execution`
+
+In plain English:
+
+- it helps people understand what Dageno exposes
+- it helps teams turn raw data into readable outputs
+- it helps agencies and operators show value faster
+- it gives your GitHub account a clearer GEO product story
+
+## Best For
+
+- GEO and SEO operators building internal workflows
+- agencies that want a public explainer before a sales call
+- founders who need a tangible MCP / API demo
+- product and growth teams building dashboards or AI-agent layers
+- open-source visitors who need to understand Dageno in 60 seconds
+
+## What This Repo Includes
+
+- a GitHub-first `README.md` with positioning, use cases, setup, and examples
+- a readable export map in [`assets/data-map.svg`](assets/data-map.svg)
+- a lightweight client in [`src/dageno_mcp_growth_playbook/client.py`](src/dageno_mcp_growth_playbook/client.py)
+- reusable workflows in [`src/dageno_mcp_growth_playbook/workflows.py`](src/dageno_mcp_growth_playbook/workflows.py)
+- a CLI in [`src/dageno_mcp_growth_playbook/cli.py`](src/dageno_mcp_growth_playbook/cli.py)
+- MCP setup examples in [`examples/cursor-mcp.json`](examples/cursor-mcp.json)
+- sample outputs in [`examples/brand-snapshot.md`](examples/brand-snapshot.md), [`examples/weekly-growth-brief.md`](examples/weekly-growth-brief.md), and [`examples/live-30-day-example.md`](examples/live-30-day-example.md)
+
+## What Dageno Can Export
+
+The Dageno MCP / Open API exposes data across these layers:
+
+| Layer | Typical Fields | What It Helps You Do |
+|---|---|---|
+| Brand | name, domain, tagline, description, socials, competitors | build project context, onboard clients, ground AI-agent prompts |
+| Topics | visibility, sentiment, avg position, citation rate, volume | see which GEO themes matter most |
+| Prompts | prompt text, intent, funnel, visibility, citation rate, volume | identify prompt gaps and decision-stage opportunities |
+| Responses | prompt-level AI answer content by platform and date | inspect how models actually describe the brand |
+| Citations | domains, URLs, prompt-level source breakdown | map the source graph behind AI answers |
+| Opportunities | content, backlink, community | turn monitoring into execution queues |
+| GEO Analysis | ranking, trend, matrix, distribution, correlation | build dashboards and strategic reports |
 
 ## Data Export Map
 
 ![Dageno Export Map](assets/data-map.svg)
 
-The Dageno MCP / Open API can export these data layers:
-
-- `brand layer`
-  - name, domain, tagline, description, socials, project context
-- `topic layer`
-  - visibility, visibility delta, sentiment, average position, citation rate, volume
-- `prompt layer`
-  - prompt text, intent, funnel stage, creation date, visibility, sentiment, citation rate, volume
-- `response layer`
-  - prompt-level answer content by platform and date
-- `citation layer`
-  - cited domains, cited URLs, prompt-level citation domains, prompt-level citation URLs
-- `opportunity layer`
-  - content opportunities
-  - backlink opportunities
-  - community opportunities
-- `analysis layer`
-  - GEO DSL analysis for ranking, trend, distribution, correlation, and matrix views
-
 ## What You Can Build From The Data
 
-| Export Type | Example Output | What You Can Do |
-|---|---|---|
-| Brand | brand snapshot | onboard new clients, ground AI-agent context, create internal project summaries |
-| Topics | topic watchlist | see which GEO themes deserve more budget, content, or monitoring |
-| Prompts | prompt gap report | identify missing or underperforming answer-engine coverage |
-| Prompt Responses | response review | analyze how different platforms describe the brand |
-| Citation Domains | source audit | see which domains shape the AI citation graph |
-| Citation URLs | page audit | locate specific pages worth replicating, contesting, or targeting |
-| Content Opportunities | publishing queue | prioritize content briefs and topic clusters |
-| Backlink Opportunities | outreach queue | export high-priority backlink targets |
-| Community Opportunities | distribution queue | identify Reddit, YouTube, and community-native distribution plays |
-| GEO Analysis | trend / ranking / matrix report | build dashboards and executive summaries |
+| Output | Why It Matters |
+|---|---|
+| brand snapshot | creates onboarding context for a client, operator, or AI agent |
+| topic watchlist | tells you which GEO themes deserve more budget and attention |
+| prompt gap report | surfaces high-value prompts with weak or incomplete coverage |
+| citation audit | shows which domains and pages shape AI answers |
+| content queue | turns opportunity data into briefs and publishing priorities |
+| backlink queue | turns source data into authority-building targets |
+| community queue | turns opportunity data into Reddit, YouTube, and distribution plays |
+| weekly GEO brief | combines the key layers into one readable report |
 
-## Concrete Example
+## Real Example: 30-Day Snapshot
 
-Here is the kind of real data path this repo is built around:
+Below is a real example pattern this repo is designed to produce.
 
-1. brand info says the project is `Dageno` on `dageno.ai`
-2. top topics include `Brand Narrative Control` and `AI Visibility Monitoring`
-3. prompt-level exports show transactional BOFU prompts such as `AI visibility monitoring platform pricing and features`
-4. citation exports show domains like `reddit.com` and `searchengineland.com`
-5. content opportunities surface prompts like `GEO implementation guide for technical teams`
-6. community opportunities surface distribution candidates across YouTube and Reddit
+Sample window:
 
-That means one API stack can power:
+- last `30` days
+- project: `Dageno`
+- generated from the included CLI workflows
+
+Observed themes from a sample run:
+
+- top topics included `Brand Narrative Control` and `AI Visibility Monitoring`
+- strong BOFU prompts included `AI visibility monitoring platform pricing and features`
+- top citation domains included `reddit.com` and `searchengineland.com`
+- top content opportunities included `Enterprise AEO solutions for brand authority`
+- top community opportunities included YouTube and Reddit entries tied to AEO / GEO prompts
+
+The important part is not the single metric snapshot.
+
+The important part is the structure:
+
+1. brand context
+2. topic performance
+3. prompt coverage
+4. source graph
+5. opportunity queue
+
+That is the foundation for:
 
 - a GEO dashboard
+- a strategy memo
 - a content backlog
-- a citation intelligence layer
-- a backlink queue
-- a community distribution queue
+- an outreach queue
+- a weekly team brief
 
-See:
+See the concrete sample:
 
-- [`examples/brand-snapshot.md`](examples/brand-snapshot.md)
-- [`examples/weekly-growth-brief.md`](examples/weekly-growth-brief.md)
+- [`examples/live-30-day-example.md`](examples/live-30-day-example.md)
 
 ## Implemented Workflows
 
-The repo ships with simple, readable workflows that map directly to practical GEO execution:
+This repo ships with simple, readable workflows that map directly to real GEO execution:
 
-| Workflow | What It Does | CLI |
+| Workflow | What It Produces | CLI |
 |---|---|---|
-| brand snapshot | export project basics and positioning context | `dageno-playbook brand-snapshot` |
-| topic watchlist | list the strongest topics over a time window | `dageno-playbook topic-watchlist --days 30` |
-| prompt gap report | rank high-value prompts to review or expand | `dageno-playbook prompt-gap --days 30` |
-| citation source brief | show the top cited domains and URLs | `dageno-playbook citation-brief --days 30` |
-| content opportunity brief | create a content priority queue | `dageno-playbook content-opportunities --days 30` |
-| backlink opportunity brief | create a backlink target list | `dageno-playbook backlink-opportunities --days 30` |
-| community opportunity brief | create a community distribution queue | `dageno-playbook community-opportunities --days 30` |
-| prompt deep dive | inspect one prompt's responses and sources | `dageno-playbook prompt-deep-dive <prompt_id>` |
-| weekly exec brief | combine the main layers into one report | `dageno-playbook weekly-brief --days 30` |
+| brand snapshot | core project context | `dageno-playbook brand-snapshot` |
+| topic watchlist | strongest topics in a time window | `dageno-playbook topic-watchlist --days 30` |
+| prompt gap report | high-value prompts to review or expand | `dageno-playbook prompt-gap --days 30` |
+| citation source brief | top cited domains and URLs | `dageno-playbook citation-brief --days 30` |
+| content opportunity brief | content priority queue | `dageno-playbook content-opportunities --days 30` |
+| backlink opportunity brief | backlink target list | `dageno-playbook backlink-opportunities --days 30` |
+| community opportunity brief | community distribution queue | `dageno-playbook community-opportunities --days 30` |
+| prompt deep dive | prompt-level response and source breakdown | `dageno-playbook prompt-deep-dive <prompt_id>` |
+| weekly exec brief | one combined report | `dageno-playbook weekly-brief --days 30` |
 
-## REST Quick Start
+## Quick Start
+
+### REST / Python
 
 ```bash
 cd dageno-mcp-growth-playbook
@@ -154,35 +172,25 @@ export DAGENO_API_KEY="your-token"
 PYTHONPATH=src python -m dageno_mcp_growth_playbook.cli brand-snapshot
 ```
 
-You can also install it as a package:
+Package install:
 
 ```bash
 pip install -e .
 dageno-playbook weekly-brief --days 30
 ```
 
-## MCP Setup
+### MCP Setup
 
-### Claude Code
+#### Claude Code
 
 ```bash
 claude mcp add --transport http dageno https://api.dageno.ai/mcp \
   --header "x-api-key: your-token"
 ```
 
-### Cursor
+#### Cursor
 
 Use [`examples/cursor-mcp.json`](examples/cursor-mcp.json).
-
-The MCP server lets you ask for:
-
-- brand basics
-- visibility analysis
-- content opportunities
-- topic and prompt summaries
-- citation source analysis
-- prompt-level deep dives
-- backlink and community opportunity ranking
 
 ## Example MCP Prompts
 
@@ -202,35 +210,33 @@ What content opportunities are available for the current project? Please rank th
 Please analyze the most frequently cited domains and page URLs over the past month, and summarize the key source patterns.
 ```
 
-## Why This Matters For SEO And GEO
+## Why This Repo Works As A Growth Asset
 
-Most teams still separate:
+This repo is not only useful for developers.
 
-- SEO reporting
-- GEO monitoring
-- citation analysis
-- content planning
-- authority building
-- community distribution
+It is also useful for:
 
-That separation slows execution.
+- prospect education before a demo call
+- client onboarding after a sale
+- internal enablement for GEO operators
+- content marketing around MCP, GEO, and AI visibility
+- showing that Dageno is not just a dashboard, but a usable data layer
 
-Dageno's data model is useful because it ties together:
+That makes it a good public asset for:
 
-- how brands appear
-- which prompts matter
-- who gets cited
-- what content is missing
-- where authority and distribution opportunities live
+- GitHub discovery
+- GEO thought leadership
+- API product storytelling
+- founder-led distribution
 
-In practice, that means you can turn MCP / Open API exports into:
+## API Notes
 
-- internal dashboards
-- client-facing GEO reports
-- monthly strategy decks
-- prompt coverage audits
-- content roadmaps
-- backlink and community execution queues
+During implementation and testing, these points mattered:
+
+- auth uses the `x-api-key` header
+- most list endpoints require both `startAt` and `endAt`
+- the backlink opportunity path is `/v1/open-api/opportunities/backlink`
+- the MCP endpoint is `https://api.dageno.ai/mcp`
 
 ## Repo Structure
 
@@ -247,6 +253,7 @@ dageno-mcp-growth-playbook/
 │   ├── brand-snapshot.md
 │   ├── cursor-mcp.json
 │   ├── geo-analysis-payload.json
+│   ├── live-30-day-example.md
 │   └── weekly-growth-brief.md
 └── src/
     └── dageno_mcp_growth_playbook/
@@ -258,10 +265,10 @@ dageno-mcp-growth-playbook/
 
 ## Recommended Use Cases
 
-- publish a strong GitHub explainer around Dageno MCP and Open API
+- publish a clearer GitHub explainer around Dageno MCP and Open API
 - show prospects what GEO data can be exported before they buy
 - create internal agent workflows on top of Dageno data
-- turn API docs into a lead-generation asset
+- turn documentation into a lead-generation asset
 - bridge SEO, GEO, citation intelligence, and execution planning
 
 ## References
