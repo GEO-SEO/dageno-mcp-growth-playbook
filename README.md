@@ -5,7 +5,7 @@
 
 # Dageno MCP Growth Playbook
 
-![Dageno MCP Growth Playbook Cover](assets/cover-v2.svg)
+![Dageno MCP Growth Playbook Cover](assets/cover-v3.png)
 
 > Turn Dageno MCP and Open API data into GEO reports, citation intelligence, prompt-gap audits, content queues, backlink targets, and community workflows.
 
@@ -65,10 +65,31 @@ In plain English:
 - product and growth teams building dashboards or AI-agent layers
 - open-source visitors who need to understand Dageno in 60 seconds
 
+## For Different Teams
+
+### For Agencies
+
+- use this repo as a pre-sales explainer before strategy calls
+- turn Dageno exports into recurring GEO reports, citation audits, and execution queues
+- show clients a clearer line from monitoring data to deliverables
+
+### For Founders
+
+- turn MCP and API access into a stronger product narrative
+- show prospects that Dageno is a workflow layer, not just a dashboard
+- publish a repo that improves credibility, discoverability, and technical trust
+
+### For Internal GEO Teams
+
+- standardize weekly reporting across brand, prompt, citation, and opportunity layers
+- convert exports into content, backlink, and community task queues
+- use the included client and workflows as a base for internal dashboards and AI agents
+
 ## What This Repo Includes
 
 - a GitHub-first `README.md` with positioning, use cases, setup, and examples
-- a readable export map in [`assets/data-map-v2.svg`](assets/data-map-v2.svg)
+- a readable export map in [`assets/data-map-v3.png`](assets/data-map-v3.png)
+- a share-ready social image in [`assets/social-preview.png`](assets/social-preview.png)
 - a lightweight client in [`src/dageno_mcp_growth_playbook/client.py`](src/dageno_mcp_growth_playbook/client.py)
 - reusable workflows in [`src/dageno_mcp_growth_playbook/workflows.py`](src/dageno_mcp_growth_playbook/workflows.py)
 - a CLI in [`src/dageno_mcp_growth_playbook/cli.py`](src/dageno_mcp_growth_playbook/cli.py)
@@ -91,7 +112,13 @@ The Dageno MCP / Open API exposes data across these layers:
 
 ## Data Export Map
 
-![Dageno Export Map](assets/data-map-v2.svg)
+![Dageno Export Map](assets/data-map-v3.png)
+
+## Social Preview Asset
+
+If you want a cleaner share card for GitHub, X, LinkedIn, or docs portals, use:
+
+- [`assets/social-preview.png`](assets/social-preview.png)
 
 ## What You Can Build From The Data
 
@@ -264,8 +291,12 @@ dageno-mcp-growth-playbook/
 ├── assets/
 │   ├── cover.svg
 │   ├── cover-v2.svg
+│   ├── cover-v3.png
 │   ├── data-map.svg
-│   └── data-map-v2.svg
+│   ├── data-map-v2.svg
+│   ├── data-map-v3.png
+│   ├── dageno-logo.png
+│   └── social-preview.png
 ├── examples/
 │   ├── brand-snapshot.md
 │   ├── cursor-mcp.json
