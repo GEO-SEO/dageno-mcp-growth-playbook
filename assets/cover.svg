@@ -1,0 +1,76 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#F7F2EA"/>
+  <rect x="48" y="48" width="1504" height="804" rx="28" fill="url(#paint0_linear)" stroke="#151515" stroke-width="2"/>
+  <rect x="84" y="84" width="480" height="236" rx="24" fill="#151515"/>
+  <text x="116" y="148" fill="#FFEEE4" font-family="Avenir Next, Segoe UI, sans-serif" font-size="28" font-weight="700">Dageno MCP</text>
+  <text x="116" y="198" fill="#FFFFFF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="56" font-weight="800">Growth Playbook</text>
+  <text x="116" y="240" fill="#FFD1B9" font-family="Avenir Next, Segoe UI, sans-serif" font-size="24" font-weight="500">Open API + MCP + GEO workflows + export map</text>
+  <text x="116" y="286" fill="#C3C3C3" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">Turn Dageno data into dashboards, content briefs, citation intelligence,</text>
+  <text x="116" y="314" fill="#C3C3C3" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">backlink targets, community queues, and weekly GEO execution reports.</text>
+
+  <rect x="84" y="368" width="224" height="120" rx="22" fill="#FFF5EF" stroke="#1A1A1A" stroke-width="2"/>
+  <text x="110" y="416" fill="#161616" font-family="Avenir Next, Segoe UI, sans-serif" font-size="28" font-weight="800">Brand</text>
+  <text x="110" y="448" fill="#4B4B4B" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">Identity, domain, socials,</text>
+  <text x="110" y="474" fill="#4B4B4B" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">positioning, competitors</text>
+
+  <rect x="332" y="368" width="224" height="120" rx="22" fill="#FFF5EF" stroke="#1A1A1A" stroke-width="2"/>
+  <text x="358" y="416" fill="#161616" font-family="Avenir Next, Segoe UI, sans-serif" font-size="28" font-weight="800">Topics</text>
+  <text x="358" y="448" fill="#4B4B4B" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">Visibility, sentiment,</text>
+  <text x="358" y="474" fill="#4B4B4B" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">avg position, volume</text>
+
+  <rect x="84" y="516" width="224" height="120" rx="22" fill="#FFF5EF" stroke="#1A1A1A" stroke-width="2"/>
+  <text x="110" y="564" fill="#161616" font-family="Avenir Next, Segoe UI, sans-serif" font-size="28" font-weight="800">Prompts</text>
+  <text x="110" y="596" fill="#4B4B4B" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">Intent, funnel, citation rate,</text>
+  <text x="110" y="622" fill="#4B4B4B" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">response details by platform</text>
+
+  <rect x="332" y="516" width="224" height="120" rx="22" fill="#FFF5EF" stroke="#1A1A1A" stroke-width="2"/>
+  <text x="358" y="564" fill="#161616" font-family="Avenir Next, Segoe UI, sans-serif" font-size="28" font-weight="800">Citations</text>
+  <text x="358" y="596" fill="#4B4B4B" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">Domains, URLs, prompt-level</text>
+  <text x="358" y="622" fill="#4B4B4B" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">source distribution</text>
+
+  <rect x="84" y="664" width="472" height="120" rx="22" fill="#151515"/>
+  <text x="116" y="712" fill="#FFEEE4" font-family="Avenir Next, Segoe UI, sans-serif" font-size="30" font-weight="800">Opportunities</text>
+  <text x="116" y="746" fill="#FFD1B9" font-family="Avenir Next, Segoe UI, sans-serif" font-size="20" font-weight="500">Content, backlink, community, GEO analysis</text>
+
+  <path d="M612 426H824" stroke="#FF6C2F" stroke-width="6" stroke-linecap="round"/>
+  <path d="M612 576H824" stroke="#FF6C2F" stroke-width="6" stroke-linecap="round"/>
+  <path d="M612 722H824" stroke="#FF6C2F" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="848" cy="426" r="16" fill="#FF6C2F"/>
+  <circle cx="848" cy="576" r="16" fill="#FF6C2F"/>
+  <circle cx="848" cy="722" r="16" fill="#FF6C2F"/>
+
+  <rect x="892" y="132" width="598" height="650" rx="28" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="2"/>
+  <text x="932" y="190" fill="#161616" font-family="Avenir Next, Segoe UI, sans-serif" font-size="42" font-weight="800">What This Project Ships</text>
+  <text x="932" y="240" fill="#616161" font-family="Avenir Next, Segoe UI, sans-serif" font-size="22" font-weight="500">A GitHub-ready playbook for SEO, GEO, analytics, and agent workflows.</text>
+
+  <rect x="932" y="292" width="230" height="126" rx="20" fill="#FFF3EC" stroke="#FF6C2F" stroke-width="2"/>
+  <text x="960" y="338" fill="#161616" font-family="Avenir Next, Segoe UI, sans-serif" font-size="26" font-weight="800">Visual Map</text>
+  <text x="960" y="370" fill="#4F4F4F" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">Export categories,</text>
+  <text x="960" y="396" fill="#4F4F4F" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">workflow paths, use cases</text>
+
+  <rect x="1188" y="292" width="262" height="126" rx="20" fill="#FFF3EC" stroke="#FF6C2F" stroke-width="2"/>
+  <text x="1216" y="338" fill="#161616" font-family="Avenir Next, Segoe UI, sans-serif" font-size="26" font-weight="800">Concrete Example</text>
+  <text x="1216" y="370" fill="#4F4F4F" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">Brand, topic, prompt,</text>
+  <text x="1216" y="396" fill="#4F4F4F" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">citation, opportunity sample</text>
+
+  <rect x="932" y="450" width="518" height="138" rx="20" fill="#151515"/>
+  <text x="966" y="498" fill="#FFFFFF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="30" font-weight="800">Simple Workflows Included</text>
+  <text x="966" y="536" fill="#FFCBAF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="20" font-weight="500">Brand snapshot</text>
+  <text x="1152" y="536" fill="#FFCBAF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="20" font-weight="500">Prompt gap report</text>
+  <text x="1366" y="536" fill="#FFCBAF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="20" font-weight="500">Content brief</text>
+  <text x="966" y="568" fill="#FFCBAF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="20" font-weight="500">Citation source audit</text>
+  <text x="1218" y="568" fill="#FFCBAF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="20" font-weight="500">Backlink queue</text>
+  <text x="1366" y="568" fill="#FFCBAF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="20" font-weight="500">Community queue</text>
+
+  <rect x="932" y="620" width="518" height="120" rx="20" fill="#FFF3EC" stroke="#1A1A1A" stroke-width="2"/>
+  <text x="962" y="664" fill="#161616" font-family="Avenir Next, Segoe UI, sans-serif" font-size="28" font-weight="800">Designed For Public GitHub Discovery</text>
+  <text x="962" y="698" fill="#4F4F4F" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">Readable README. MCP setup. API examples. GEO use cases. Shareable graph.</text>
+
+  <defs>
+    <linearGradient id="paint0_linear" x1="150" y1="120" x2="1456" y2="812" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9F5"/>
+      <stop offset="1" stop-color="#FFE7D9"/>
+    </linearGradient>
+  </defs>
+</svg>
+

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dageno-mcp-growth-playbook"
+version = "0.1.0"
+description = "A growth-oriented Dageno Open API and MCP playbook for SEO, GEO, citation intelligence, and opportunity workflows."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = ["requests>=2.31.0"]
+
+[project.scripts]
+dageno-playbook = "dageno_mcp_growth_playbook.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+

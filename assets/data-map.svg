@@ -1,0 +1,82 @@
+<svg width="1600" height="960" viewBox="0 0 1600 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="960" fill="#F8F4ED"/>
+  <text x="72" y="94" fill="#171717" font-family="Avenir Next, Segoe UI, sans-serif" font-size="52" font-weight="800">Dageno MCP / Open API Export Map</text>
+  <text x="72" y="136" fill="#5A5A5A" font-family="Avenir Next, Segoe UI, sans-serif" font-size="22" font-weight="500">What you can export, and what you can build from it.</text>
+
+  <rect x="72" y="200" width="260" height="120" rx="24" fill="#151515"/>
+  <text x="100" y="248" fill="#FFF2EA" font-family="Avenir Next, Segoe UI, sans-serif" font-size="30" font-weight="800">Brand Layer</text>
+  <text x="100" y="282" fill="#FFD2BA" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">identity, domain, summary,</text>
+  <text x="100" y="308" fill="#FFD2BA" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">socials, competitors</text>
+
+  <rect x="72" y="360" width="260" height="120" rx="24" fill="#FFF7F2" stroke="#151515" stroke-width="2"/>
+  <text x="100" y="408" fill="#171717" font-family="Avenir Next, Segoe UI, sans-serif" font-size="30" font-weight="800">Topic Layer</text>
+  <text x="100" y="442" fill="#555555" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">visibility, sentiment,</text>
+  <text x="100" y="468" fill="#555555" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">citation rate, volume</text>
+
+  <rect x="72" y="520" width="260" height="120" rx="24" fill="#FFF7F2" stroke="#151515" stroke-width="2"/>
+  <text x="100" y="568" fill="#171717" font-family="Avenir Next, Segoe UI, sans-serif" font-size="30" font-weight="800">Prompt Layer</text>
+  <text x="100" y="602" fill="#555555" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">prompt text, intent, funnel,</text>
+  <text x="100" y="628" fill="#555555" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">response-level detail</text>
+
+  <rect x="72" y="680" width="260" height="120" rx="24" fill="#FFF7F2" stroke="#151515" stroke-width="2"/>
+  <text x="100" y="728" fill="#171717" font-family="Avenir Next, Segoe UI, sans-serif" font-size="30" font-weight="800">Source Layer</text>
+  <text x="100" y="762" fill="#555555" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">citation domains, citation URLs,</text>
+  <text x="100" y="788" fill="#555555" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">prompt-specific sources</text>
+
+  <rect x="478" y="250" width="282" height="120" rx="24" fill="#FFF0E6" stroke="#FF6C2F" stroke-width="3"/>
+  <text x="508" y="298" fill="#171717" font-family="Avenir Next, Segoe UI, sans-serif" font-size="30" font-weight="800">GEO Analysis</text>
+  <text x="508" y="332" fill="#555555" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">trend, ranking, matrix,</text>
+  <text x="508" y="358" fill="#555555" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">distribution, correlation</text>
+
+  <rect x="478" y="430" width="282" height="120" rx="24" fill="#FFF0E6" stroke="#FF6C2F" stroke-width="3"/>
+  <text x="508" y="478" fill="#171717" font-family="Avenir Next, Segoe UI, sans-serif" font-size="30" font-weight="800">Opportunities</text>
+  <text x="508" y="512" fill="#555555" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">content, backlink, community,</text>
+  <text x="508" y="538" fill="#555555" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">priority queues</text>
+
+  <path d="M332 260H448" stroke="#FF6C2F" stroke-width="6" stroke-linecap="round"/>
+  <path d="M332 420H448" stroke="#FF6C2F" stroke-width="6" stroke-linecap="round"/>
+  <path d="M332 580H448" stroke="#FF6C2F" stroke-width="6" stroke-linecap="round"/>
+  <path d="M332 740H448" stroke="#FF6C2F" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="463" cy="260" r="14" fill="#FF6C2F"/>
+  <circle cx="463" cy="420" r="14" fill="#FF6C2F"/>
+  <circle cx="463" cy="580" r="14" fill="#FF6C2F"/>
+  <circle cx="463" cy="740" r="14" fill="#FF6C2F"/>
+
+  <rect x="906" y="152" width="622" height="690" rx="30" fill="#151515"/>
+  <text x="946" y="214" fill="#FFFFFF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="42" font-weight="800">What You Can Build</text>
+
+  <rect x="946" y="258" width="254" height="118" rx="22" fill="#FFF5EF"/>
+  <text x="972" y="304" fill="#171717" font-family="Avenir Next, Segoe UI, sans-serif" font-size="28" font-weight="800">Brand Snapshot</text>
+  <text x="972" y="336" fill="#4C4C4C" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">Use brand + topic data for</text>
+  <text x="972" y="362" fill="#4C4C4C" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">onboarding and client context</text>
+
+  <rect x="1230" y="258" width="254" height="118" rx="22" fill="#FFF5EF"/>
+  <text x="1256" y="304" fill="#171717" font-family="Avenir Next, Segoe UI, sans-serif" font-size="28" font-weight="800">Prompt Gap Audit</text>
+  <text x="1256" y="336" fill="#4C4C4C" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">Find high-value prompts</text>
+  <text x="1256" y="362" fill="#4C4C4C" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">with weak coverage</text>
+
+  <rect x="946" y="408" width="254" height="118" rx="22" fill="#FFF5EF"/>
+  <text x="972" y="454" fill="#171717" font-family="Avenir Next, Segoe UI, sans-serif" font-size="28" font-weight="800">Citation Audit</text>
+  <text x="972" y="486" fill="#4C4C4C" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">See which sites and pages</text>
+  <text x="972" y="512" fill="#4C4C4C" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">shape AI answers</text>
+
+  <rect x="1230" y="408" width="254" height="118" rx="22" fill="#FFF5EF"/>
+  <text x="1256" y="454" fill="#171717" font-family="Avenir Next, Segoe UI, sans-serif" font-size="28" font-weight="800">Content Queue</text>
+  <text x="1256" y="486" fill="#4C4C4C" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">Turn content opportunities</text>
+  <text x="1256" y="512" fill="#4C4C4C" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">into briefs and priorities</text>
+
+  <rect x="946" y="558" width="254" height="118" rx="22" fill="#FFF5EF"/>
+  <text x="972" y="604" fill="#171717" font-family="Avenir Next, Segoe UI, sans-serif" font-size="28" font-weight="800">Backlink Queue</text>
+  <text x="972" y="636" fill="#4C4C4C" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">Export target domains and</text>
+  <text x="972" y="662" fill="#4C4C4C" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">supporting URLs</text>
+
+  <rect x="1230" y="558" width="254" height="118" rx="22" fill="#FFF5EF"/>
+  <text x="1256" y="604" fill="#171717" font-family="Avenir Next, Segoe UI, sans-serif" font-size="28" font-weight="800">Community Queue</text>
+  <text x="1256" y="636" fill="#4C4C4C" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">Find Reddit, YouTube, and</text>
+  <text x="1256" y="662" fill="#4C4C4C" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">community-ready topics</text>
+
+  <rect x="946" y="708" width="538" height="98" rx="22" fill="#FF6C2F"/>
+  <text x="978" y="750" fill="#FFF9F5" font-family="Avenir Next, Segoe UI, sans-serif" font-size="30" font-weight="800">Weekly GEO Brief = Brand + Topics + Prompts + Sources + Opportunities</text>
+  <text x="978" y="780" fill="#FFE0CF" font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="500">Exactly the kind of export that can turn MCP data into a shareable growth operating system.</text>
+</svg>
+
