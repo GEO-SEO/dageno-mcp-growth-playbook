@@ -1,82 +1,190 @@
 # Dageno Content Factory Pipeline Spec
 
-This reference describes the current skill logic:
+This reference captures the latest workflow logic for the skill.
 
-- start from Dageno content opportunities
-- analyze response detail and citation URLs
-- make a **new-content** decision
-- output an SEO + GEO blueprint or draft
+The key shift is:
 
-It also notes future extensions without making them required for the current skill.
+- not one prompt to one article
+- but one high-opportunity prompt to one reusable content pack
 
-## Goal
+## Core Principles
 
-Turn one Dageno content opportunity into one new content asset.
+### 1. High-value opportunities do not always have high prompt volume
 
-## Product Framing
+Do not rank opportunity quality by prompt volume alone.
 
-The system should follow this model:
+A strong opportunity can exist when:
 
-- `prompt` = monitored opportunity surface
-- `response detail` = evidence of the current AI narrative
-- `citation URLs` = evidence of the sources AI trusts
-- `new content asset` = the output to produce
+- brand gap is high
+- source gap is high
+- responses are numerous
+- business intent is strong
+- prompt volume is still low or zero
 
-Do not model the workflow as:
+This is one of Dageno's strongest product-value narratives.
 
-- one keyword = one article
-- or one chat = one article
+### 2. Heavy analysis should produce multiple downstream assets
 
-The response detail and citation URLs are evidence inputs, not direct output units.
+One full pass of:
 
-## Current Scope
+- prompt evidence
+- response evidence
+- citation evidence
+- fanout
+- SEO enrichment
 
-Included now:
+should lead to a content pack, not just one article.
 
-- choose a content opportunity
-- inspect response detail
-- inspect citation URLs
-- translate prompt to keyword cluster
-- enrich with SEO metrics when available
-- classify intentions
-- choose a new content asset type
-- generate a blueprint or draft
+### 3. Prompt fanout is a first-class workflow step
 
-Not included yet:
+Even if the connector arrives later, the step must remain in the architecture.
 
-- existing-content refresh logic
-- content inventory matching
-- post-publish monitoring loop
+Do not remove it.
+Do not do fanout of fanout.
 
-## Demand Principles
+## Main Workflow
 
-### 1. GEO demand and SEO demand are different
+### Step 1: collect opportunities
 
-- `observed_prompt_volume` = real prompt demand for the seed prompt from Dageno
-- `estimated_prompt_volume` = proxy demand for fanout prompts when direct prompt data is unavailable
-- `search_volume` = keyword demand from SEO connector
-- `keyword_difficulty` = keyword competition from SEO connector
+Source:
 
-### 2. Fanout demand must be labeled honestly
+- `get_content_opportunities`
 
-If fanout prompts do not have direct prompt data, do not store them as observed prompt volume.
+### Step 2: classify into tiers
+
+Classify all prompts into:
+
+- High Opportunity
+- Medium Opportunity
+- Low Opportunity
+
+Default to High first.
+
+### Step 3: select the working prompt
+
+Capture:
+
+- prompt id
+- prompt text
+- topic
+- funnel
+- intentions
+- observed prompt volume
+
+### Step 4: inspect response evidence
 
 Use:
 
+- response list
+- response detail
+
+Questions:
+
+- how many responses exist
+- how many mention the brand
+- what framing dominates
+- what entities appear instead
+
+### Step 5: inspect citation evidence
+
+Use:
+
+- prompt-level citation URLs
+
+Questions:
+
+- what source types dominate
+- what domains dominate
+- what content formats are most cited
+
+### Step 6: run prompt fanout
+
+Goal:
+
+- expand the selected prompt into adjacent prompt opportunities
+
+This is required to turn one prompt into a content pack.
+
+### Step 7: run SEO translation
+
+Use:
+
+- primary keyword extraction
+- keyword expansion
+- search volume
+- KD
+- intention mapping
+
+### Step 8: build the unified decision object
+
+Combine:
+
+- opportunity tier
+- prompt profile
+- response-gap summary
+- citation summary
+- fanout outputs
+- keyword cluster
+- SEO metrics
+- intentions
+
+### Step 9: output the content pack
+
+The pack should include:
+
+- selected prompt
+- key evidence
+- fanout prompt set
+- keyword cluster
+- recommended asset list
+- creation order
+
+### Step 10: choose the next generated asset
+
+Possible downstream outputs:
+
+- article
+- future landing page
+- future supporting asset
+
+## Opportunity Tiers
+
+### High Opportunity
+
+Usually:
+
+- high brand gap
+- high source gap
+- enough response count
+- high commercial or product relevance
+
+### Medium Opportunity
+
+Usually:
+
+- partial gap
+- weaker stability or weaker business fit
+
+### Low Opportunity
+
+Usually:
+
+- weak gap
+- small sample size
+- weak business fit
+
+## Demand Layers
+
+Keep these separate:
+
+- `observed_prompt_volume`
 - `estimated_prompt_volume`
-- `volume_estimation_method`
-- `volume_confidence`
+- `search_volume`
+- `keyword_difficulty`
 
-### 3. Intentions should follow Dageno categories
+## Intention Normalization
 
-Use:
-
-- `Transactional`
-- `Commercial`
-- `Navigational`
-- `Informational`
-
-Recommended structure:
+The workflow should normalize both:
 
 ```json
 {
@@ -89,265 +197,61 @@ Recommended structure:
 }
 ```
 
-## Main Workflow
+and:
 
-### Step 1: select one opportunity
+```json
+[
+  {
+    "i": "Transactional",
+    "s": 88
+  }
+]
+```
 
-Input:
+## Future Branches
 
-- `get_content_opportunities`
+Keep visible in project architecture:
 
-Selection factors:
+- landing page generation
+- existing-content refresh
+- post-publish monitoring loop
 
-- priority
-- brand gap
-- source gap
-- platform spread
-
-Output:
-
-- `opportunity_id`
-- `seed_prompt`
-
-### Step 2: inspect response detail
-
-Input:
-
-- `Get response detail by prompt`
-
-Goal:
-
-- explain how AI currently frames the prompt
-
-Questions to answer:
-
-- what did AI emphasize
-- what did AI omit
-- which competitors were mentioned
-- what claims, product categories, proof points, or use cases were absent
-
-Output:
-
-- `response_gap_summary`
-
-### Step 3: inspect citation URLs
-
-Input:
-
-- `List citation URLs`
-
-Goal:
-
-- explain what sources AI relied on
-
-Preferred mode:
-
-- fetch cited pages with Jina or Firecrawl
-
-Fallback mode:
-
-- infer from domain, URL, title, and page-type hints
-
-Questions to answer:
-
-- what source types were cited
-- what content structure they used
-- what evidence style made them citable
-
-Output:
-
-- `citation_summary`
-
-### Step 4: add prompt-side demand
-
-Input:
-
-- seed prompt
-- Dageno prompt data
-
-Goal:
-
-- record real prompt demand for the seed opportunity
-
-Output:
-
-- `observed_prompt_volume`
-
-### Step 5: translate the prompt into SEO language
-
-Input:
-
-- seed prompt
-
-Goal:
-
-- create a usable SEO topic model
-
-Output:
-
-- `primary_keyword`
-- `keyword_cluster`
-
-### Step 6: add SEO metrics
-
-Input:
-
-- keyword cluster
-- SEO metrics connector
-
-Output:
-
-- `search_volume`
-- `keyword_difficulty`
-
-If unavailable:
-
-- mark metrics as pending and continue
-
-### Step 7: add intentions
-
-Input:
-
-- keyword cluster
-
-Output:
-
-- keyword-level `intentions`
-- cluster-level `dominant_intention`
-
-### Step 8: build the unified opportunity object
-
-Combine:
-
-- opportunity metadata
-- response-gap evidence
-- citation evidence
-- prompt demand
-- keyword demand
-- intentions
-
-This object is the input to the final decision engine.
-
-### Step 9: decide the new content asset
-
-Current allowed decisions:
-
-- `Pillar`
-- `Standard`
-- `Lightweight`
-
-This stage does not ask whether an existing page should be updated.
-
-It asks:
-
-- what new asset should be created from this opportunity
-
-### Step 10: generate the blueprint
-
-Output:
-
-- title
-- H1
-- H2/H3
-- FAQ
-- citation-informed writing guidance
-- chunk plan
-- schema recommendations
-
-### Step 11: optional draft generation
-
-If requested, turn the blueprint into a draft.
-
-## Optional Enhancements
-
-### Citation page fetching
-
-Plan A:
-
-- Jina or Firecrawl
-
-Plan B:
-
-- metadata-only citation inference
-
-### SERP enrichment
-
-Plan A:
-
-- approved SERP API or user-provided export
-
-Plan B:
-
-- skip SERP enrichment
-
-SERP is not a hard dependency for the current skill.
-
-## Future Product Extension
-
-Later, this same workflow can be extended into a monitoring loop:
-
-1. publish content
-2. monitor the same prompt again
-3. check whether brand gap or source gap shrinks
-4. decide whether to add more new content or update existing content
-
-That loop is useful product direction, but it is not required for the current skill.
-
-## Suggested Unified Data Model
+## Suggested Unified Object
 
 ```json
 {
-  "opportunity_id": "opp_001",
-  "seed_prompt": "GEO implementation guide for technical teams",
-  "source": "dageno:get_content_opportunities",
-  "prompt_snapshot": {
-    "priority": "high",
-    "brand_gap": 100,
-    "source_gap": 100
-  },
-  "response_gap_summary": {
-    "competitors_mentioned": ["CSP"],
-    "brand_missing": true,
-    "missing_angles": [
-      "brand-specific implementation narrative",
-      "enterprise monitoring use case",
-      "proof-oriented product framing"
+  "opportunity_tier": "High",
+  "selected_prompt": {
+    "id": "673c9c68-b400-4cab-ae78-66925f06eab3",
+    "prompt": "Enterprise AEO solutions for brand authority",
+    "topic": "Answer Engine Optimization",
+    "funnel": "BOFU",
+    "observed_prompt_volume": 0,
+    "intentions": [
+      {
+        "i": "Transactional",
+        "s": 88
+      }
     ]
   },
-  "citation_summary": {
-    "citation_urls": [
-      "https://example.com/guide"
-    ],
-    "common_source_types": [
-      "guide",
-      "blog post"
+  "evidence": {
+    "response_count": 94,
+    "mentioned_true": 0,
+    "mentioned_false": 94,
+    "top_page_types": [
+      ["Article", 393],
+      ["Listicle", 106]
     ]
   },
-  "prompt_demand": {
-    "observed_prompt_volume": 820
+  "fanout": {
+    "prompts": []
   },
-  "keyword_candidates": [
-    {
-      "keyword": "geo implementation guide",
-      "role": "primary",
-      "search_volume": 1200,
-      "keyword_difficulty": 28,
-      "intentions": [
-        {
-          "score": 82,
-          "intention": "Informational"
-        },
-        {
-          "score": 18,
-          "intention": "Commercial"
-        }
-      ]
-    }
-  ],
-  "aggregates": {
-    "primary_keyword": "geo implementation guide",
-    "dominant_intention": "Informational",
-    "recommended_asset_type": "Standard"
+  "seo": {
+    "primary_keyword": null,
+    "keyword_cluster": []
+  },
+  "content_pack": {
+    "recommended_assets": []
   }
 }
 ```
