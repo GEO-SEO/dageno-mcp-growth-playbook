@@ -372,7 +372,8 @@ Required:
 
 Reserved / optional:
 
-- future KD connector
+- prompt fanout connector
+- SEO metrics connector
 - page fetch connectors
 - SERP connector
 

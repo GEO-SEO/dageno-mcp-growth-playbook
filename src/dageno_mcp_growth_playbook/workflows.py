@@ -163,18 +163,6 @@ def _keyword_cluster_guesses(prompt_text: str, topic: str) -> List[str]:
     return seen
 
 
-def _dedupe_keep_order(values: List[str]) -> List[str]:
-    seen = set()
-    output: List[str] = []
-    for value in values:
-        key = value.strip().lower()
-        if not key or key in seen:
-            continue
-        seen.add(key)
-        output.append(value.strip())
-    return output
-
-
 def _page_type_family(citations: List[Dict[str, Any]]) -> str:
     page_types = [c.get("pageType") or "Unknown" for c in citations]
     if not page_types:
@@ -885,33 +873,15 @@ def content_pack(
     primary_intent = _primary_intention((selected_prompt or {}).get("intentions") or [])
     tier = _opportunity_tier(selected_opportunity)
     dominant_page_type = _page_type_family(citations)
-    guessed_fanout = _fanout_prompt_guesses(
+    fanout_prompts = _fanout_prompt_guesses(
         selected_opportunity.get("prompt", ""),
         selected_opportunity.get("topic", ""),
         primary_intent,
     )
-    api_fanout: List[str] = []
-    if selected_prompt_id:
-        try:
-            fanout_items = _collect_all(
-                lambda **kwargs: client.prompt_query_fanout(selected_prompt_id, start_at, end_at, **kwargs),
-                page_size=100,
-            )
-            api_fanout = [item.get("name", "").strip() for item in fanout_items if item.get("name")]
-        except Exception:
-            api_fanout = []
-    fanout_prompts = _dedupe_keep_order(api_fanout + guessed_fanout)
-
-    keyword_cluster = _dedupe_keep_order(
-        _keyword_cluster_guesses(selected_opportunity.get("prompt", ""), selected_opportunity.get("topic", ""))
-        + fanout_prompts[:5]
+    keyword_cluster = _keyword_cluster_guesses(
+        selected_opportunity.get("prompt", ""),
+        selected_opportunity.get("topic", ""),
     )
-    keyword_volume_rows: List[Dict[str, Any]] = []
-    if keyword_cluster:
-        try:
-            keyword_volume_rows = client.keyword_volume(keyword_cluster[:10]).get("data", [])
-        except Exception:
-            keyword_volume_rows = []
     asset_rows = _asset_rows(
         prompt_text=selected_opportunity.get("prompt", ""),
         opportunity_tier=tier,
@@ -978,20 +948,7 @@ def content_pack(
     lines.extend(["", "## SEO Layer", ""])
     lines.append(f"- Primary Keyword Candidate: `{keyword_cluster[0] if keyword_cluster else '-'}`")
     lines.append(f"- Keyword Cluster: {', '.join(keyword_cluster) or '-'}")
-    if keyword_volume_rows:
-        lines.append("- Search Volume:")
-        for row in keyword_volume_rows[:10]:
-            lines.append(
-                "  - `{keyword}` | vol `{vol}` | competition `{competition}` | cpc `{currency}{value}`".format(
-                    keyword=row.get("keyword", "-"),
-                    vol=_fmt_number(row.get("vol")),
-                    competition=_fmt_number(row.get("competition")),
-                    currency=(row.get("cpc") or {}).get("currency", ""),
-                    value=(row.get("cpc") or {}).get("value", "-"),
-                )
-            )
-    else:
-        lines.append("- Search Volume + KD: pending connector")
+    lines.append("- Search Volume + KD: pending connector")
     lines.append(f"- Primary Intention: `{primary_intent}`")
 
     lines.extend(["", "## Recommended Asset List", ""])

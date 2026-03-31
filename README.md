@@ -1,254 +1,404 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Skill](https://img.shields.io/badge/skill-GEO%20Content%20Opportunity%20Engine-blue)](skills/dageno-content-factory.md)
-[![Workflow](https://img.shields.io/badge/workflow-Inputs%20%E2%86%92%20Evidence%20%E2%86%92%20Fanout%20%E2%86%92%20Content%20Pack-orange)](references/pipeline-spec.md)
+[![Skill](https://img.shields.io/badge/skill-Dageno%20Content%20Opportunity%20Agent-blue)](skills/dageno-content-factory.md)
+[![Workflow](https://img.shields.io/badge/workflow-Opportunity%20%E2%86%92%20Evidence%20%E2%86%92%20Fanout%20%E2%86%92%20Content%20Pack-orange)](references/pipeline-spec.md)
 
-# GEO Content Opportunity Engine
+# Dageno MCP Growth Playbook
 
 ![Dageno MCP Growth Playbook Cover](assets/cover-v3.png)
 
-> A GEO-first content engine that turns Dageno opportunity data into structured content packs for ongoing article generation, future landing pages, and agent-driven execution.
+> Turn Dageno content opportunities into SEO + GEO content packs by combining brand-gap evidence, citation evidence, prompt fanout, keyword demand, and structured content decisions.
 
-## Positioning
+## What This Project Is
 
-This project is intentionally different from a traditional SEO content engine.
+This repo packages a Dageno-powered content agent as a reusable skill.
 
-Your other project, `seo-geo-content-engine`, starts from keyword-side demand and content production.
+It is built for one practical job:
 
-This project starts from **GEO evidence**:
+> Start from Dageno content opportunities, identify which prompts matter most, inspect how AI is answering them, inspect what sources AI trusts, expand the prompt into adjacent demand, and output a reusable content pack instead of just one article.
 
-- AI answer gaps
-- source gaps
-- response detail
-- citation URLs
-- prompt fanout
+This is not only a reporting workflow.
+This is not only a keyword workflow.
 
-Then it translates that GEO evidence into content production decisions.
+It is a **content opportunity operating system** for SEO + GEO teams.
 
-That is why the correct positioning for this repo is:
+## Core Product Idea
 
-**GEO Content Opportunity Engine**
+The core insight behind this skill is:
 
-## What Makes This Valuable
+**High-value content opportunities do not always have high prompt volume.**
 
-The core Dageno value is not just "finding prompts."
+That matters because many important AI-search opportunities are invisible if you only look at raw volume.
 
-It is helping teams discover:
+Dageno becomes valuable when it helps teams find prompts where:
 
-- prompts where AI is repeatedly answering a high-value question
-- prompts where competitors or adjacent entities appear but your brand does not
-- prompts where source ecosystems are already formed without you
-- prompts where raw prompt volume may still look low, but the business value is high
+- the brand gap is high
+- the source gap is high
+- AI keeps answering the prompt across platforms
+- competitors or adjacent entities are being included
+- your brand is still missing
 
-This matters because:
+That is a stronger signal than volume alone.
 
-**high-value content opportunities do not always have high prompt volume**
+## What The Agent Should Do
 
-That is one of the strongest GEO-specific signals this project can surface.
+For each run, the agent should:
 
-## Inputs
+1. classify opportunities into `High / Medium / Low`
+2. default to `High` opportunities first
+3. allow the user to choose a specific prompt if they want
+4. inspect responses and response detail
+5. inspect citation URLs and source structure
+6. run prompt fanout
+7. translate prompt demand into SEO keyword demand
+8. enrich with search volume, KD, and intention
+9. output a **content pack**
+10. then optionally choose one article or one future landing page to generate
 
-This engine depends on a mix of Dageno-native data and extensible enrichment layers.
+## Why This Is Better Than One-Article Generation
 
-### Required GEO inputs
+One heavy round of analysis should not produce only one article.
 
-- `List content opportunities`
-- `List prompts`
-- `List responses by prompt`
-- `Get response detail by prompt`
-- `List citation URLs by prompt`
+The right unit is:
 
-### GEO enrichment
+- one high-opportunity prompt
+- one evidence pass
+- one fanout layer
+- one SEO/GEO merge
+- one reusable content pack
 
-- `List query fanout by prompt`
+That content pack can then feed:
 
-### SEO enrichment
+- multiple articles
+- future landing pages
+- future docs pages
+- future comparison pages
 
-- `Get keyword volume`
-- keyword extraction
-- keyword expansion
-- keyword intent normalization
-- future KD connector
+This is how the workflow scales without wasting tokens.
 
-## Outputs
+## Opportunity Tiers
 
-The main output is not one article.
+The agent should classify all prompts into three tiers.
 
-The main output is a **content pack** that contains:
+### High Opportunity
 
-- opportunity tiers
-- selected prompt
-- prompt profile
-- evidence layer
-- fanout layer
-- SEO layer
-- recommended asset list
-- creation order
+Typical traits:
 
-Then the user or an agent can choose:
+- very high brand gap
+- very high source gap
+- enough response count to show the gap is stable
+- prompt strongly aligned with product narrative or commercial intent
 
-- article generation
-- future landing page generation
-- future supporting asset generation
+Use this as the default queue.
 
-## Why GEO Data Changes The Workflow
+### Medium Opportunity
 
-A normal SEO workflow often asks:
+Typical traits:
 
-- what keyword has search demand
-- what page should we write
+- some real gap exists
+- either demand, stability, or commercial closeness is weaker
 
-This GEO-first workflow asks:
+Good for the second queue.
 
-- what high-value prompt is AI already answering
-- where is our brand missing
-- which sources are shaping the answer
-- what adjacent prompt demand exists
-- what content pack should be created to enter that answer space
+### Low Opportunity
 
-That is a much stronger story for Dageno than generic keyword research.
+Typical traits:
 
-## Flow Overview
+- weaker gap
+- low sample size
+- lower business relevance
+
+Keep visible, but do not prioritize first.
+
+## Main Workflow
 
 ```mermaid
 flowchart TD
-    A["Inputs<br/>content opportunities, prompts, responses, response detail, citation URLs"] --> B["Opportunity Tiering<br/>High / Medium / Low"]
-    B --> C["Selected Prompt<br/>default to High first, user can override"]
-    C --> D["Prompt Profile<br/>topic, funnel, intentions, observed prompt volume"]
-    C --> E["Evidence Layer<br/>response count, mention gap, recurring entities, citation types"]
-    C --> F["Prompt Fanout<br/>adjacent prompt opportunities"]
-    C --> G["SEO Translation<br/>primary keyword, keyword cluster, volume, KD, intent"]
-    D --> H["Unified Decision Object"]
-    E --> H
-    F --> H
-    G --> H
-    H --> I["Recommended Asset List<br/>article, landing page, docs, comparison, community"]
-    I --> J["Creation Order<br/>what to publish first, second, third"]
-    J --> K["Execution Layer<br/>agent writes article or future landing page"]
+    A["1. Get content opportunities"] --> B["2. Classify opportunities<br/>High / Medium / Low"]
+    B --> C["3. Select one prompt<br/>default: High first"]
+    C --> D["4. Get prompt profile<br/>topic / volume / intentions / funnel"]
+    C --> E["5. Get responses<br/>sample size and cross-platform evidence"]
+    C --> F["6. Get response detail<br/>how AI is framing the topic"]
+    C --> G["7. Get citation URLs<br/>what sources AI trusts"]
+
+    F --> H["8. Response-gap analysis"]
+    G --> I["9. Citation analysis"]
+
+    C --> J["10. Prompt fanout<br/>keep connector slot ready"]
+    C --> K["11. SEO translation<br/>extract primary keyword"]
+    K --> L["12. Keyword expansion"]
+    L --> M["13. Search Volume + KD"]
+    L --> N["14. Intention mapping"]
+
+    D --> O["15. Unified decision object"]
+    E --> O
+    H --> O
+    I --> O
+    J --> O
+    M --> O
+    N --> O
+
+    O --> P["16. Output content pack"]
+    P --> Q["17. Choose next asset to generate"]
+    Q --> R["18. Generate article"]
+    Q --> S["Future branch: generate landing page"]
 ```
 
-## End-to-End Content Flow
+## Why The Order Matters
 
-### 1. Opportunity Tiering
+### Evidence first
 
-All prompts should first be classified into:
+The agent should not jump from prompt to article.
 
-- `High Opportunity`
-- `Medium Opportunity`
-- `Low Opportunity`
-
-The engine should default to `High` first.
-
-### 2. Prompt Profile
-
-For the selected prompt, capture:
-
-- prompt id
-- prompt text
-- topic
-- funnel
-- intentions
-- observed prompt volume
-
-### 3. Evidence Layer
-
-Use:
-
-- response list
-- response detail
-- citation URLs
-
-To answer:
+It should first confirm:
 
 - is the gap real
-- is it stable
-- how is AI framing the topic
-- what entities are filling the space
-- what page types dominate the citation layer
+- is the gap stable
+- how AI is currently framing the topic
+- what source patterns dominate the answer space
 
-### 4. Fanout Layer
+### Fanout before final content selection
 
-Use:
+Prompt fanout should happen before the final content decision.
 
-- `List query fanout by prompt`
+Why:
 
-To expand one prompt into adjacent prompt opportunities.
+- one prompt should expand into adjacent prompt opportunities
+- this is how the system creates a content pack instead of a single article
 
-This is the bridge between:
+### SEO and GEO must merge
 
-- one opportunity
-- and a reusable content pack
+The system should not stop at AI-answer evidence.
+It also needs:
 
-### 5. SEO Layer
+- keyword translation
+- keyword expansion
+- search volume
+- KD
+- intention
 
-Use:
+Only then should it decide what to create.
 
-- primary keyword extraction
-- keyword cluster expansion
-- `Get keyword volume`
-- future KD connector
-- intention mapping
+## What The Agent Produces
 
-To turn GEO-side evidence into SEO-side decisions.
+The primary output is a **content pack**, not just a draft.
 
-### 6. Content Pack
+For one high-opportunity prompt, the pack should include:
 
-Combine the GEO layer and SEO layer into:
+- selected prompt and opportunity tier
+- prompt profile
+- response-gap summary
+- citation summary
+- fanout prompt set
+- keyword cluster
+- search metrics and intentions
+- recommended asset list
+- recommended order of creation
 
-- one reusable content pack
-- one recommended asset list
-- one creation order
+Then the user can choose:
+
+- article
+- future landing page
+- future supporting asset
 
 ## Recommended Asset List Schema
 
-This table is the operational core of the system.
+The core of the content pack should be a structured `Recommended Asset List`.
+
+Do not output this as loose bullets only.
+Treat it as a fixed table so it can feed:
+
+- recurring tasks
+- agent pipelines
+- editorial planning
+- publishing workflows
+
+Suggested columns:
 
 | Column | Meaning |
 |---|---|
 | `asset_id` | unique row id |
-| `source_prompt` | source seed prompt |
+| `source_prompt` | the seed prompt this asset comes from |
 | `opportunity_tier` | High / Medium / Low |
 | `asset_title` | recommended title |
 | `asset_type` | article / landing_page / docs / comparison / community |
-| `recommended_publish_surface` | where to publish |
+| `recommended_publish_surface` | where this asset should be published |
 | `target_intent` | Transactional / Commercial / Informational / Navigational |
-| `primary_angle` | main angle |
-| `why_exists` | why this asset exists |
-| `derived_from` | normalized source signals |
-| `writing_inputs` | required writing inputs |
+| `primary_angle` | the main angle of the asset |
+| `why_exists` | why this asset should exist |
+| `derived_from` | what data signals produced this asset idea |
+| `writing_inputs` | what data should be used while writing |
 | `priority` | high / medium / low |
 | `status` | planned / queued / writing / published |
-| `notes` | optional notes |
+| `notes` | optional execution notes |
 
-## GEO Data Value, Explicitly
+### Recommended Publish Surface
 
-This project should make Dageno's GEO value obvious.
+`recommended_publish_surface` should be inferred from citation patterns and asset intent.
 
-The platform is useful because it helps answer questions such as:
+Examples:
 
-- which commercially important prompts exclude the brand entirely
-- which answer spaces are already shaped by third-party sources
-- which content formats AI systems already trust
-- which adjacent prompts deserve new content
-- which content assets should exist before writing begins
+- `website_blog`
+- `landing_page`
+- `docs_page`
+- `comparison_page`
+- `community_post`
+- `third_party_article`
 
-That is more valuable than a plain keyword list.
+Basic rule:
 
-## GEO Writing Standard
+- if `Article` dominates, prefer `website_blog`
+- if `Listicle` dominates, prefer `website_blog` or `third_party_article`
+- if `Homepage / Product Page / Category Page` dominates, keep `landing_page` or `comparison_page` open
+- if `Discussion` dominates, consider `community_post`
 
-When an asset row is turned into actual content, follow these rules:
+### Derived From
 
-1. Start with a direct definition or answer.
-2. Make each H2 understandable without the rest of the page.
+`derived_from` should not be vague.
+It should use normalized signals such as:
+
+- `high_brand_gap`
+- `high_source_gap`
+- `repeated_response_framing`
+- `dominant_article_citations`
+- `dominant_listicle_citations`
+- `fanout_prompt_cluster`
+- `high_transactional_intent`
+- `keyword_search_demand`
+
+### Writing Inputs
+
+`writing_inputs` should explicitly list which data the writer or agent should use.
+
+Examples:
+
+- `top_response_details`
+- `top_citation_urls`
+- `top_entities_in_mentions`
+- `fanout_prompt_set`
+- `keyword_cluster`
+- `search_volume_and_kd`
+- `dageno_product_positioning`
+
+## GEO Writing Guidance
+
+When the agent turns one row from the content pack into a written asset, it should follow a consistent GEO writing standard.
+
+### Core rules
+
+1. Start definition-first.
+2. Make each H2 independently understandable.
 3. Put the answer before the explanation.
-4. Keep one core idea per paragraph.
+4. Keep one main idea per paragraph.
 5. Prefer lists, tables, steps, and comparisons when useful.
-6. Name entities and capabilities explicitly.
-7. Use FAQ as an extraction layer.
-8. Write in a way that can be quoted by AI systems as a standalone answer.
+6. Make entities, product names, and capabilities explicit.
+7. Use FAQ as an extraction layer, not as filler.
+8. Write content that can function both as an article and as an answer source.
 
-## Live Commands
+### Practical output pattern
 
-### Basic opportunity view
+Each written GEO asset should aim to include:
+
+- a short definition-led opening
+- context-independent H2 sections
+- short answer-led paragraphs
+- at least one structured block such as a list or table
+- a FAQ block
+- evidence-backed claims where possible
+- extractable chunk-friendly sections
+
+## Future Branches
+
+This project should explicitly leave room for:
+
+### 1. Landing page generation
+
+Why:
+
+- landing pages are often more direct for SEO conversion and commercial capture
+- the current citation pattern may suggest educational content first, but landing pages should remain a planned branch
+
+### 2. Existing-content refresh
+
+Not the current priority.
+Keep it as a future branch.
+
+### 3. Post-publish monitoring loop
+
+Also future:
+
+- publish
+- re-monitor
+- see whether brand gap or source gap shrinks
+
+## Connectors
+
+| Layer | Status | Notes |
+|---|---|---|
+| Dageno content opportunities | ready | source queue |
+| Dageno prompt profile | ready | topic, volume, intentions, funnel |
+| Dageno responses | ready | cross-platform evidence |
+| Dageno response detail | ready | response-gap evidence |
+| Dageno citation URLs | ready | source evidence |
+| prompt fanout | reserved | connector slot should stay in workflow |
+| SEO search volume / KD | reserved | connector slot should stay in workflow |
+| landing page generation | future branch | keep in architecture |
+
+## Recommended Runtime Flow
+
+### 1. Review tiers
+
+Start by listing:
+
+- High Opportunity
+- Medium Opportunity
+- Low Opportunity
+
+Default to High first.
+
+### 2. Pick a prompt
+
+If the user does not pick one, use the highest-priority item from the High tier.
+
+### 3. Build the evidence layer
+
+Inspect:
+
+- prompt profile
+- responses
+- response detail
+- citation URLs
+
+### 4. Expand the opportunity
+
+Run:
+
+- prompt fanout
+- keyword translation
+- keyword expansion
+- SEO metrics
+- intentions
+
+### 5. Output the content pack
+
+Do not collapse everything into one article too early.
+
+## Existing Python Layer
+
+The repo already includes:
+
+- [`src/dageno_mcp_growth_playbook/client.py`](src/dageno_mcp_growth_playbook/client.py)
+- [`src/dageno_mcp_growth_playbook/workflows.py`](src/dageno_mcp_growth_playbook/workflows.py)
+- [`src/dageno_mcp_growth_playbook/cli.py`](src/dageno_mcp_growth_playbook/cli.py)
+
+These stay as the base for:
+
+- Dageno API connectivity
+- live testing
+- future agent workflow extensions
+
+## Quick Start
+
+### Python / CLI
 
 ```bash
 cd dageno-mcp-growth-playbook
@@ -259,16 +409,10 @@ export DAGENO_API_KEY="your-token"
 PYTHONPATH=src python -m dageno_mcp_growth_playbook.cli content-opportunities --days 7
 ```
 
-### Full content pack
+Run the live new-content brief:
 
 ```bash
-PYTHONPATH=src python -m dageno_mcp_growth_playbook.cli content-pack --days 7
-```
-
-### Target one prompt
-
-```bash
-PYTHONPATH=src python -m dageno_mcp_growth_playbook.cli content-pack --days 7 --prompt-text "Enterprise AEO solutions for brand authority"
+PYTHONPATH=src python -m dageno_mcp_growth_playbook.cli new-content-brief --days 7
 ```
 
 ## Repo Structure

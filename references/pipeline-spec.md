@@ -37,8 +37,9 @@ should lead to a content pack, not just one article.
 
 ### 3. Prompt fanout is a first-class workflow step
 
-The connector is now part of the workflow and should remain in the architecture.
+Even if the connector arrives later, the step must remain in the architecture.
 
+Do not remove it.
 Do not do fanout of fanout.
 
 ## Main Workflow
@@ -111,7 +112,7 @@ Use:
 - primary keyword extraction
 - keyword expansion
 - search volume
-- future KD
+- KD
 - intention mapping
 
 ### Step 8: build the unified decision object
