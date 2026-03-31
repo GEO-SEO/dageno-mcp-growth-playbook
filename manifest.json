@@ -1,0 +1,59 @@
+{
+  "name": "dageno-mcp-growth-playbook",
+  "version": "0.2.0",
+  "display_name": "Dageno SEO + GEO Content Factory",
+  "description": "Turn Dageno content opportunities into SEO + GEO content plans with prompt demand, keyword demand, citation intelligence, fallback-safe SERP enrichment, and publish-ready briefs.",
+  "author": {
+    "name": "GEO-SEO",
+    "website": "https://github.com/GEO-SEO/dageno-mcp-growth-playbook"
+  },
+  "tags": [
+    "dageno",
+    "seo",
+    "geo",
+    "content-strategy",
+    "citation-intelligence",
+    "keyword-research",
+    "prompt-research",
+    "content-briefs"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GEO-SEO/dageno-mcp-growth-playbook"
+  },
+  "integrations": {
+    "dageno_api": {
+      "required_env_vars": [
+        "DAGENO_API_KEY"
+      ],
+      "recommended_access": "project-scoped API key"
+    },
+    "seo_metrics_api": {
+      "optional_env_vars": [
+        "SEO_METRICS_API_URL",
+        "SEO_METRICS_API_KEY"
+      ],
+      "recommended_provider": "any approved search volume and keyword difficulty API"
+    },
+    "citation_page_fetch": {
+      "optional_env_vars": [
+        "JINA_API_KEY",
+        "FIRECRAWL_API_KEY"
+      ],
+      "recommended_provider": "Jina or Firecrawl"
+    },
+    "serp_retrieval": {
+      "optional_env_vars": [
+        "SERPAPI_API_KEY"
+      ],
+      "recommended_provider": "approved SERP API or user-provided export"
+    }
+  },
+  "metadata": {
+    "skill_type": "content-workflow",
+    "network_access": "optional",
+    "minimum_permissions": "Dageno API access required; SEO metrics, page fetch, and SERP enrichment are optional connectors.",
+    "data_access_policy": "Do not assume hidden access to private search APIs, page crawlers, or Google scraping. Fall back to Dageno-only and user-provided inputs when optional connectors are missing."
+  }
+}

@@ -1,198 +1,480 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![MCP](https://img.shields.io/badge/mcp-Dageno%20Server-blue)](https://mkt3dcy1n7.apidog.io/2055617m0)
-[![Open API](https://img.shields.io/badge/open%20api-GEO%20Data-orange)](https://mkt3dcy1n7.apidog.io/)
-[![Workflows](https://img.shields.io/badge/workflows-Brand%20%7C%20Prompt%20%7C%20Citation%20%7C%20Opportunity-informational)](src/dageno_mcp_growth_playbook/workflows.py)
+[![Skill](https://img.shields.io/badge/skill-Dageno%20SEO%20%2B%20GEO%20Content%20Factory-blue)](skills/dageno-content-factory.md)
+[![Workflow](https://img.shields.io/badge/workflow-Prompt%20%E2%86%92%20Keyword%20%E2%86%92%20Citation%20%E2%86%92%20Brief-orange)](references/pipeline-spec.md)
 
 # Dageno MCP Growth Playbook
 
 ![Dageno MCP Growth Playbook Cover](assets/cover-v3.png)
 
-> Turn Dageno MCP and Open API data into GEO reports, citation intelligence, prompt-gap audits, content queues, backlink targets, and community workflows.
+> Turn one Dageno content opportunity into a structured SEO + GEO content plan, with prompt demand, keyword demand, citation intelligence, fallback-safe research, and publish-ready briefs.
 
-This repo does **not** include a shared Dageno project or a shared API key.
-Each user connects their **own** Dageno project and **own** `x-api-key`.
+## What This Project Is
 
-**Positioning**
+This repo is now packaged as a reusable skill and playbook for teams building a data-driven content factory on top of Dageno.
 
-`Dageno MCP Growth Playbook` is a public-facing project for teams that want to do more than read API docs.
+It is designed for one practical job:
 
-It turns the Dageno API surface into a usable GEO operating layer:
-
-- a readable explainer for founders, agencies, and operators
-- a visual map of what data can be exported
-- a concrete example based on real Dageno output
-- a lightweight Python client
-- simple workflows you can run, demo, extend, or plug into agents
-
-This repo is built to answer a practical question:
-
-> If I already have Dageno access, how do I turn it into something a team can actually use, share, and build on?
-
-## The Problem
-
-Most API projects stop at:
-
-- endpoint lists
-- auth instructions
-- a few request examples
-
-That is not enough for SEO and GEO operators who need to decide:
-
-- which topics matter most right now
-- which prompts are worth chasing
-- which domains dominate the citation graph
-- what content should be published next
-- what outreach or community actions deserve priority
-
-## The Promise
-
-This repo bridges:
-
-- `docs -> exports -> analysis -> workflows -> execution`
+> Start with a Dageno seed prompt, combine GEO and SEO signals, compress dozens of variants into a small set of content assets, and output clear writing briefs instead of disconnected research notes.
 
 In plain English:
 
-- it helps people understand what Dageno exposes
-- it helps teams turn raw data into readable outputs
-- it helps agencies and operators show value faster
-- it gives your GitHub account a clearer GEO product story
+- Dageno tells you which prompt opportunity exists
+- the system measures AI-side demand and search-side demand separately
+- the system studies which sources AI already cites
+- the system optionally studies Google SERP patterns when safe connectors are available
+- the system decides what should become a main article, a section, an FAQ block, or a GEO chunk
+
+## What Makes This Different
+
+Most content workflows start from a keyword list or from a blank AI prompt.
+
+This project starts from **opportunity data** and keeps SEO and GEO as two separate but connected layers:
+
+- `Prompt demand` tells you what users ask in AI-native language
+- `Keyword demand` tells you what users search in Google-style language
+- `Citation data` tells you what content AI engines already trust enough to cite
+- `SERP data` tells you what Google currently rewards in rankings
+
+That makes the output much more useful than a generic article generator.
 
 ## Best For
 
-- GEO and SEO operators building internal workflows
-- agencies that want a public explainer before a sales call
-- founders who need a tangible MCP / API demo
-- product and growth teams building dashboards or AI-agent layers
-- open-source visitors who need to understand Dageno in 60 seconds
+- GEO and SEO teams that want one content decision system instead of separate research steps
+- agencies that need a repeatable way to turn Dageno opportunity data into content roadmaps
+- founders building an internal or client-facing content factory
+- operators who want briefs, chunk maps, FAQ structure, and schema guidance instead of loose notes
 
-## For Different Teams
+## Start With These Prompts
 
-### For Agencies
+```text
+Use Dageno Content Factory to turn our top content opportunities into a prioritized SEO + GEO content plan.
+```
 
-- use this repo as a pre-sales explainer before strategy calls
-- turn Dageno exports into recurring GEO reports, citation audits, and execution queues
-- show clients a clearer line from monitoring data to deliverables
+```text
+Run the Dageno Content Factory workflow for the highest-priority prompt opportunity from the last 30 days.
+```
 
-### For Founders
+```text
+Analyze one Dageno seed prompt and tell me whether it should become a pillar page, a standard article, or lightweight GEO coverage.
+```
 
-- turn MCP and API access into a stronger product narrative
-- show prospects that Dageno is a workflow layer, not just a dashboard
-- publish a repo that improves credibility, discoverability, and technical trust
+## Skill Entry Point
 
-### For Internal GEO Teams
+The main skill lives here:
 
-- standardize weekly reporting across brand, prompt, citation, and opportunity layers
-- convert exports into content, backlink, and community task queues
-- use the included client and workflows as a base for internal dashboards and AI agents
+- [`skills/dageno-content-factory.md`](skills/dageno-content-factory.md)
 
-## What This Repo Includes
+Detailed pipeline notes live here:
 
-- a GitHub-first `README.md` with positioning, use cases, setup, and examples
-- a readable export map in [`assets/data-map-v3.png`](assets/data-map-v3.png)
-- a share-ready social image in [`assets/social-preview.png`](assets/social-preview.png)
-- a lightweight client in [`src/dageno_mcp_growth_playbook/client.py`](src/dageno_mcp_growth_playbook/client.py)
-- reusable workflows in [`src/dageno_mcp_growth_playbook/workflows.py`](src/dageno_mcp_growth_playbook/workflows.py)
-- a CLI in [`src/dageno_mcp_growth_playbook/cli.py`](src/dageno_mcp_growth_playbook/cli.py)
-- MCP setup examples in [`examples/cursor-mcp.json`](examples/cursor-mcp.json)
-- sample outputs in [`examples/brand-snapshot.md`](examples/brand-snapshot.md), [`examples/weekly-growth-brief.md`](examples/weekly-growth-brief.md), and [`examples/live-30-day-example.md`](examples/live-30-day-example.md)
+- [`references/pipeline-spec.md`](references/pipeline-spec.md)
 
-## What Dageno Can Export
+## Core Idea
 
-The Dageno MCP / Open API exposes data across these layers:
+One seed prompt does not equal one article.
 
-| Layer | Typical Fields | What It Helps You Do |
+The system first expands, scores, and compresses the opportunity:
+
+1. Dageno provides the seed opportunity
+2. Dageno prompt data provides observed prompt demand for the seed prompt
+3. the model expands SEO keyword clusters and GEO fanout prompts
+4. SEO connectors provide search volume and keyword difficulty
+5. citation URLs reveal what AI engines are already citing
+6. optional SERP analysis adds ranking-page intelligence
+7. the system groups everything into a small number of content assets
+
+The result is usually:
+
+- `30-50` prompt or keyword candidates in research
+- compressed into roughly `5-12` content assets
+- each asset output as a brief, chunk plan, FAQ set, and schema guidance
+
+## Pipeline Overview
+
+```mermaid
+flowchart TD
+    A["1. Dageno Content Opportunity<br/>seed prompt"] --> B["2. Prompt Demand<br/>observed prompt volume for seed"]
+    A --> C["3. Keyword Translation<br/>LLM extracts primary keyword"]
+    C --> D["4. Keyword Expansion<br/>LLM builds keyword cluster"]
+    D --> E["5. SEO Metrics<br/>search volume + KD"]
+    D --> F["6. Search Intent<br/>Dageno-aligned intentions"]
+    A --> G["7. Fanout Prompts<br/>future Dageno connector or estimated demand"]
+    A --> H["8. Citation URLs<br/>GEO source layer"]
+
+    B --> I["9. Unified Data Layer"]
+    E --> I
+    F --> I
+    G --> I
+    H --> I
+
+    I --> J["10. Citation Intelligence<br/>what AI already cites"]
+    I --> K["11. Optional SERP Intelligence<br/>what Google currently rewards"]
+
+    J --> L["12. Decision Engine<br/>group, score, compress"]
+    K --> L
+
+    L --> M["13. Content Blueprint<br/>title, H1, H2, FAQ, chunk plan"]
+    M --> N["14. GEO Packaging<br/>schema, standalone chunks, llms.txt guidance"]
+    N --> O["15. Post-Publish Loop<br/>GSC + AI citation monitoring"]
+```
+
+## The Workflow, Step By Step
+
+### 1. Get the seed prompt from Dageno
+
+**What happens**
+
+- call `get_content_opportunities`
+- store the top opportunity and its base metadata
+
+**Why it exists**
+
+- this is the starting opportunity, not a guessed topic
+
+**Output**
+
+- `opportunity_id`
+- `seed_prompt`
+- source metadata such as market, language, and created time when available
+
+### 2. Measure prompt-side demand
+
+**What happens**
+
+- look up the seed prompt in Dageno prompt data
+- record its real observed prompt demand
+
+**Why it exists**
+
+- prompt demand is the GEO-side signal
+- it tells you whether this topic matters in AI-native language
+
+**Output**
+
+- `observed_prompt_volume` for the seed prompt
+
+### 3. Translate the seed prompt into SEO language
+
+**What happens**
+
+- use the model to extract the main keyword theme from the seed prompt
+
+**Why it exists**
+
+- a prompt is not the same thing as a keyword
+- search engines and AI prompts speak different query languages
+
+**Output**
+
+- `primary_keyword`
+
+### 4. Expand the keyword cluster
+
+**What happens**
+
+- use the model to expand related keywords, long-tail variations, and adjacent formulations
+
+**Why it exists**
+
+- one article usually targets a keyword set, not only one exact term
+
+**Output**
+
+- `keyword_candidates`
+
+### 5. Add SEO demand signals
+
+**What happens**
+
+- fetch `search_volume` and `keyword_difficulty` from your SEO metrics connector
+
+**Why it exists**
+
+- this is the SEO-side demand and competition layer
+
+**Output**
+
+- `search_volume`
+- `keyword_difficulty`
+
+### 6. Add Dageno-aligned search intentions
+
+**What happens**
+
+- classify each keyword using the Dageno intention model:
+  - `Transactional`
+  - `Commercial`
+  - `Navigational`
+  - `Informational`
+
+**Why it exists**
+
+- content grouping should follow buying stage and information need, not only volume
+
+**Output**
+
+- `intentions[]` per keyword
+- one cluster-level `dominant_intention`
+
+### 7. Add fanout prompts
+
+**What happens**
+
+- when a Dageno fanout endpoint exists, use it
+- until then, allow estimated fanout handling
+
+**Why it exists**
+
+- fanout prompts reveal how adjacent AI-native demand branches out from the seed prompt
+
+**Important nuance**
+
+- fanout prompts do **not** currently have real observed prompt volume
+- they should use estimated demand fields such as:
+  - `estimated_prompt_volume`
+  - `volume_estimation_method`
+  - `volume_confidence`
+
+### 8. Add citation URLs
+
+**What happens**
+
+- pull `List citation URLs` for the seed prompt or prompt-level citation view
+
+**Why it exists**
+
+- this shows what URLs AI engines are already willing to cite
+
+**Output**
+
+- `citation_urls`
+
+### 9. Merge everything into the unified data layer
+
+**What happens**
+
+- combine prompt-side, keyword-side, and citation-side data into one decision object
+
+**Why it exists**
+
+- later decisions should use one complete object instead of scattered raw data
+
+**Output**
+
+- one normalized opportunity record
+
+### 10. Run citation intelligence
+
+**What happens**
+
+- inspect cited pages and infer what content formats AI prefers
+
+**Why it exists**
+
+- citation structure is one of the strongest GEO writing signals
+
+**Preferred connector**
+
+- user-provided `Jina` or `Firecrawl`
+
+**Fallback**
+
+- if no page-fetch connector exists, analyze URL, domain, title, and page-type hints only
+
+### 11. Run optional SERP intelligence
+
+**What happens**
+
+- inspect ranking pages, PAA, snippets, and AI Overview when safe connectors are available
+
+**Why it exists**
+
+- SERP patterns tell you what Google currently rewards
+
+**Plan A**
+
+- use an approved SERP API or user-provided SERP export
+
+**Plan B**
+
+- skip or sample SERP analysis if large-scale Google fetching is risky or unavailable
+
+This is intentionally an enhancement layer, not a hard dependency.
+
+### 12. Compress the opportunity into content assets
+
+**What happens**
+
+- group by intent, topic overlap, SEO demand, prompt demand, and citation evidence
+
+**Why it exists**
+
+- the goal is not one article per term
+- the goal is a small, sensible content system
+
+**Typical outputs**
+
+- pillar article
+- standard article
+- lightweight article
+- FAQ cluster
+- GEO chunk block
+
+### 13. Generate the content blueprint
+
+**What happens**
+
+- produce a brief, not just a keyword list
+
+**Output**
+
+- recommended title
+- H1
+- H2/H3 structure
+- FAQ list
+- evidence requirements
+- citation-informed writing notes
+
+### 14. Package the GEO layer
+
+**What happens**
+
+- create standalone chunk guidance and schema recommendations
+
+**Why it exists**
+
+- content should be easier for AI systems to extract and cite
+
+**Output**
+
+- standalone chunk plan
+- FAQ schema guidance
+- article schema guidance
+- `llms.txt` guidance
+
+### 15. Close the loop after publishing
+
+**What happens**
+
+- monitor GSC and AI citation behavior
+
+**Why it exists**
+
+- this is how the system decides whether to keep content merged or split it later
+
+**Typical actions**
+
+- keep merged
+- split high-performing sections into standalone pages
+- enrich FAQs
+- rewrite chunks
+
+## Prompt Demand vs Search Demand
+
+This project treats these as separate measurements.
+
+| Signal | What It Means | Source |
 |---|---|---|
-| Brand | name, domain, tagline, description, socials, competitors | build project context, onboard clients, ground AI-agent prompts |
-| Topics | visibility, sentiment, avg position, citation rate, volume | see which GEO themes matter most |
-| Prompts | prompt text, intent, funnel, visibility, citation rate, volume | identify prompt gaps and decision-stage opportunities |
-| Responses | prompt-level AI answer content by platform and date | inspect how models actually describe the brand |
-| Citations | domains, URLs, prompt-level source breakdown | map the source graph behind AI answers |
-| Opportunities | content, backlink, community | turn monitoring into execution queues |
-| GEO Analysis | ranking, trend, matrix, distribution, correlation | build dashboards and strategic reports |
+| observed prompt volume | real demand seen in prompt data | Dageno prompt layer |
+| estimated prompt volume | proxy demand for fanout prompts without direct observation | model + SEO proxy logic |
+| search volume | search demand in keyword language | SEO metrics connector |
+| keyword difficulty | ranking competition | SEO metrics connector |
 
-## Data Export Map
+This distinction matters because one seed prompt may be strong in AI-native demand while still mapping to weak or fragmented search demand.
 
-![Dageno Export Map](assets/data-map-v3.png)
+## Dageno-Aligned Intention Model
 
-## Social Preview Asset
+The skill should align keyword intentions to the Dageno format:
 
-If you want a cleaner share card for GitHub, X, LinkedIn, or docs portals, use:
+- `Transactional Intent`
+- `Commercial Intent`
+- `Navigational Intent`
+- `Informational Intent`
 
-- [`assets/social-preview.png`](assets/social-preview.png)
+Recommended structure:
 
-## What You Can Build From The Data
+```json
+{
+  "intentions": [
+    {
+      "score": 86,
+      "intention": "Commercial"
+    }
+  ]
+}
+```
 
-| Output | Why It Matters |
-|---|---|
-| brand snapshot | creates onboarding context for a client, operator, or AI agent |
-| topic watchlist | tells you which GEO themes deserve more budget and attention |
-| prompt gap report | surfaces high-value prompts with weak or incomplete coverage |
-| citation audit | shows which domains and pages shape AI answers |
-| content queue | turns opportunity data into briefs and publishing priorities |
-| backlink queue | turns source data into authority-building targets |
-| community queue | turns opportunity data into Reddit, YouTube, and distribution plays |
-| weekly GEO brief | combines the key layers into one readable report |
+## Connectors
 
-## Real Example: 30-Day Snapshot
-
-Below is a real example pattern this repo is designed to produce.
-
-Sample window:
-
-- last `30` days
-- project: `Dageno`
-- generated from the included CLI workflows
-- requires a Dageno project with accessible data
-
-Observed themes from a sample run:
-
-- top topics included `Brand Narrative Control` and `AI Visibility Monitoring`
-- strong BOFU prompts included `AI visibility monitoring platform pricing and features`
-- top citation domains included `reddit.com` and `searchengineland.com`
-- top content opportunities included `Enterprise AEO solutions for brand authority`
-- top community opportunities included YouTube and Reddit entries tied to AEO / GEO prompts
-
-The important part is not the single metric snapshot.
-
-The important part is the structure:
-
-1. brand context
-2. topic performance
-3. prompt coverage
-4. source graph
-5. opportunity queue
-
-That is the foundation for:
-
-- a GEO dashboard
-- a strategy memo
-- a content backlog
-- an outreach queue
-- a weekly team brief
-
-See the concrete sample:
-
-- [`examples/live-30-day-example.md`](examples/live-30-day-example.md)
-
-## Implemented Workflows
-
-This repo ships with simple, readable workflows that map directly to real GEO execution:
-
-| Workflow | What It Produces | CLI |
+| Layer | Status | Notes |
 |---|---|---|
-| brand snapshot | core project context | `dageno-playbook brand-snapshot` |
-| topic watchlist | strongest topics in a time window | `dageno-playbook topic-watchlist --days 30` |
-| prompt gap report | high-value prompts to review or expand | `dageno-playbook prompt-gap --days 30` |
-| citation source brief | top cited domains and URLs | `dageno-playbook citation-brief --days 30` |
-| content opportunity brief | content priority queue | `dageno-playbook content-opportunities --days 30` |
-| backlink opportunity brief | backlink target list | `dageno-playbook backlink-opportunities --days 30` |
-| community opportunity brief | community distribution queue | `dageno-playbook community-opportunities --days 30` |
-| prompt deep dive | prompt-level response and source breakdown | `dageno-playbook prompt-deep-dive <prompt_id>` |
-| weekly exec brief | one combined report | `dageno-playbook weekly-brief --days 30` |
+| Dageno content opportunities | ready | seed prompt source |
+| Dageno prompt volume | ready | observed demand for seed prompt |
+| Dageno citation URLs | ready | GEO source intelligence |
+| Dageno fanout prompts | planned | keep connector slot ready |
+| SEO search volume / KD | planned | user-supplied API slot |
+| page fetch for citation URLs | optional | user can provide Jina or Firecrawl |
+| SERP data | optional | approved API or user-provided export |
+
+## Plan A / Plan B
+
+### Plan A: full workflow
+
+Use when the user provides:
+
+- Dageno API access
+- SEO metrics connector
+- page fetch connector such as Jina or Firecrawl
+- optional SERP connector
+
+Best for:
+
+- full analysis
+- citation-page structure mining
+- stronger SEO and GEO recommendation quality
+
+### Plan B: safe fallback
+
+Use when one or more connectors are missing.
+
+Fallback behavior:
+
+- keep Dageno opportunity and citation inputs
+- keep keyword expansion and intention mapping
+- skip full citation page fetch if Jina / Firecrawl is missing
+- skip or sample SERP analysis if no safe connector exists
+- still produce a content blueprint
+
+The project should never fail just because a non-core connector is missing.
+
+## What The Skill Produces
+
+For each prioritized seed prompt, the system can produce:
+
+- a normalized opportunity object
+- a keyword cluster with demand and intention labels
+- a fanout prompt set with estimated demand when needed
+- citation-source analysis and writing recommendations
+- a content decision such as pillar / standard / lightweight
+- a brief with title, H1, H2, FAQ, and evidence guidance
+- GEO chunk packaging and schema recommendations
+
+## Existing Python Layer
+
+The repo already includes a lightweight Python client and workflow helpers:
+
+- [`src/dageno_mcp_growth_playbook/client.py`](src/dageno_mcp_growth_playbook/client.py)
+- [`src/dageno_mcp_growth_playbook/workflows.py`](src/dageno_mcp_growth_playbook/workflows.py)
+- [`src/dageno_mcp_growth_playbook/cli.py`](src/dageno_mcp_growth_playbook/cli.py)
+
+These are useful building blocks for:
+
+- Dageno API connectivity
+- initial reporting workflows
+- demos and CLI-based inspection
 
 ## Quick Start
 
-### REST / Python
+### Python / CLI
 
 ```bash
 cd dageno-mcp-growth-playbook
@@ -200,85 +482,29 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 export DAGENO_API_KEY="your-token"
-PYTHONPATH=src python -m dageno_mcp_growth_playbook.cli brand-snapshot
+PYTHONPATH=src python -m dageno_mcp_growth_playbook.cli weekly-brief --days 30
 ```
 
-Package install:
+### Install As A Package
 
 ```bash
 pip install -e .
 dageno-playbook weekly-brief --days 30
 ```
 
-### MCP Setup
+### Use The Skill
 
-#### Claude Code
+Start from:
 
-```bash
-claude mcp add --transport http dageno https://api.dageno.ai/mcp \
-  --header "x-api-key: your-token"
-```
+- [`skills/dageno-content-factory.md`](skills/dageno-content-factory.md)
 
-#### Cursor
+Then provide:
 
-Use [`examples/cursor-mcp.json`](examples/cursor-mcp.json).
-
-## Who Needs What
-
-To use this project, a customer needs:
-
-- a Dageno project
-- an API key for that project
-- enough project data for topics, prompts, citations, and opportunities to return useful results
-
-This repo is the wrapper and workflow layer.
-It is not a public demo dataset.
-
-## Example MCP Prompts
-
-```text
-Please analyze the brand basics of the current project and summarize positioning, core keywords, and main competitors.
-```
-
-```text
-Please evaluate the current project's visibility performance over the past month, and provide key findings and trend insights.
-```
-
-```text
-What content opportunities are available for the current project? Please rank the top three by priority and explain why.
-```
-
-```text
-Please analyze the most frequently cited domains and page URLs over the past month, and summarize the key source patterns.
-```
-
-## Why This Repo Works As A Growth Asset
-
-This repo is not only useful for developers.
-
-It is also useful for:
-
-- prospect education before a demo call
-- client onboarding after a sale
-- internal enablement for GEO operators
-- content marketing around MCP, GEO, and AI visibility
-- showing that Dageno is not just a dashboard, but a usable data layer
-
-That makes it a good public asset for:
-
-- GitHub discovery
-- GEO thought leadership
-- API product storytelling
-- founder-led distribution
-
-## API Notes
-
-During implementation and testing, these points mattered:
-
-- auth uses the `x-api-key` header
-- most list endpoints require both `startAt` and `endAt`
-- the backlink opportunity path is `/v1/open-api/opportunities/backlink`
-- the MCP endpoint is `https://api.dageno.ai/mcp`
+- one Dageno project
+- one Dageno API key
+- optional SEO metrics connector
+- optional Jina or Firecrawl credentials
+- optional SERP connector or exported SERP snapshots
 
 ## Repo Structure
 
@@ -286,44 +512,33 @@ During implementation and testing, these points mattered:
 dageno-mcp-growth-playbook/
 ├── README.md
 ├── LICENSE
-├── requirements.txt
-├── pyproject.toml
+├── manifest.json
+├── agents/
+│   └── openai.yaml
+├── skills/
+│   └── dageno-content-factory.md
+├── references/
+│   └── pipeline-spec.md
 ├── assets/
-│   ├── cover.svg
-│   ├── cover-v2.svg
-│   ├── cover-v3.png
-│   ├── data-map.svg
-│   ├── data-map-v2.svg
-│   ├── data-map-v3.png
-│   ├── dageno-logo.png
-│   └── social-preview.png
 ├── examples/
-│   ├── brand-snapshot.md
-│   ├── cursor-mcp.json
-│   ├── geo-analysis-payload.json
-│   ├── live-30-day-example.md
-│   └── weekly-growth-brief.md
 └── src/
-    └── dageno_mcp_growth_playbook/
-        ├── __init__.py
-        ├── cli.py
-        ├── client.py
-        └── workflows.py
 ```
 
-## Recommended Use Cases
+## Why This Repo Is Useful Even Before All Connectors Are Final
 
-- publish a clearer GitHub explainer around Dageno MCP and Open API
-- show prospects what GEO data can be exported before they buy
-- create internal agent workflows on top of Dageno data
-- turn documentation into a lead-generation asset
-- bridge SEO, GEO, citation intelligence, and execution planning
+This project already gives you:
 
-## References
+- a stable narrative for the product
+- a clear SEO + GEO dual-demand model
+- a fallback-safe research pipeline
+- a reusable skill entry point for testing
 
-- [Dageno Open API Docs](https://mkt3dcy1n7.apidog.io/)
-- [Dageno MCP Docs](https://mkt3dcy1n7.apidog.io/2055617m0)
-- [GEO Analysis Guide](https://mkt3dcy1n7.apidog.io/2055618m0)
+And it leaves clean extension points for:
+
+- SEO search volume / KD APIs
+- Dageno fanout prompt connectors
+- citation page crawling
+- safe SERP enrichment
 
 ## License
 
