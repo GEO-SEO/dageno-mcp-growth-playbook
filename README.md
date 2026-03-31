@@ -1,294 +1,402 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Skill](https://img.shields.io/badge/skill-Dageno%20Content%20Opportunity%20Agent-blue)](skills/dageno-content-factory.md)
-[![Workflow](https://img.shields.io/badge/workflow-Opportunity%20%E2%86%92%20Evidence%20%E2%86%92%20Fanout%20%E2%86%92%20Content%20Pack-orange)](references/pipeline-spec.md)
+[![Workflow](https://img.shields.io/badge/workflow-Opportunity%20%E2%86%92%20Response%20Gap%20%E2%86%92%20Citation%20%E2%86%92%20New%20Content-orange)](references/pipeline-spec.md)
 
 # Dageno MCP Growth Playbook
 
 ![Dageno MCP Growth Playbook Cover](assets/cover-v3.png)
 
-> Turn Dageno content opportunities into SEO + GEO content packs by combining brand-gap evidence, citation evidence, prompt fanout, keyword demand, and structured content decisions.
+> Turn Dageno content opportunities into new SEO + GEO content assets by analyzing response gaps, citation sources, keyword demand, and content intent.
 
 ## What This Project Is
 
 This repo packages a Dageno-powered content agent as a reusable skill.
 
-It is built for one practical job:
+It is built for one focused use case:
 
-> Start from Dageno content opportunities, identify which prompts matter most, inspect how AI is answering them, inspect what sources AI trusts, expand the prompt into adjacent demand, and output a reusable content pack instead of just one article.
+> Every day, take the highest-value Dageno content opportunities, inspect how AI answered them, inspect what URLs were cited, and turn that evidence into brand-new content briefs or drafts.
 
-This is not only a reporting workflow.
-This is not only a keyword workflow.
+This is not a site-maintenance workflow.
 
-It is a **content opportunity operating system** for SEO + GEO teams.
+For now, the skill is designed only for **new content creation**:
 
-## Core Product Idea
+- pick a prompt opportunity
+- inspect the answer gap
+- inspect the citation sources
+- translate the prompt into SEO keyword demand
+- decide what new content to create
+- output a brief or full draft
 
-The core insight behind this skill is:
+Post-publish monitoring is intentionally kept as a future extension.
 
-**High-value content opportunities do not always have high prompt volume.**
+## Product Logic
 
-That matters because many important AI-search opportunities are invisible if you only look at raw volume.
+Your Dageno project starts from a fixed prompt universe.
 
-Dageno becomes valuable when it helps teams find prompts where:
+If a customer tracks `100` prompts, the system will not invent infinite prompt opportunities. Instead, it creates a continuous content machine by repeatedly detecting new or persistent gaps inside those tracked prompts:
 
-- the brand gap is high
-- the source gap is high
-- AI keeps answering the prompt across platforms
-- competitors or adjacent entities are being included
-- your brand is still missing
+- brand gap: competitors are mentioned but your brand is not
+- source gap: AI cites sources that support others, not you
+- response gap: the answer explains the topic but misses your product narrative, category fit, proof, or use case
 
-That is a stronger signal than volume alone.
+That means the content unit should not be:
 
-## What The Agent Should Do
+- one keyword
+- or one chat
 
-For each run, the agent should:
+The right production logic is:
 
-1. classify opportunities into `High / Medium / Low`
-2. default to `High` opportunities first
-3. allow the user to choose a specific prompt if they want
-4. inspect responses and response detail
-5. inspect citation URLs and source structure
-6. run prompt fanout
-7. translate prompt demand into SEO keyword demand
-8. enrich with search volume, KD, and intention
-9. output a **content pack**
-10. then optionally choose one article or one future landing page to generate
+- `Prompt` defines the monitoring surface
+- `Response detail` provides the gap evidence
+- `Citation URLs` provide the source evidence
+- `Content asset` is the final output
 
-## Why This Is Better Than One-Article Generation
+## What Makes This Different
 
-One heavy round of analysis should not produce only one article.
+Most content systems start from keyword research.
 
-The right unit is:
+This one starts from **AI visibility gaps**:
 
-- one high-opportunity prompt
-- one evidence pass
-- one fanout layer
-- one SEO/GEO merge
-- one reusable content pack
+1. Dageno shows where a prompt has high brand or source gap
+2. response detail shows exactly how AI is framing the topic
+3. citation URLs show which pages AI is trusting
+4. keyword research translates that opportunity into SEO language
+5. the agent decides what new content should exist
 
-That content pack can then feed:
+This makes the workflow much closer to the product's core value.
 
-- multiple articles
-- future landing pages
-- future docs pages
-- future comparison pages
+## Best For
 
-This is how the workflow scales without wasting tokens.
+- GEO teams that want to turn monitoring data into new articles
+- SEO operators that need AI-gap-driven content ideas, not just keyword ideas
+- agencies that want a repeatable prompt-to-brief workflow for clients
+- founders who want a public or internal skill that demonstrates Dageno as an action layer
 
-## Opportunity Tiers
+## Start With These Prompts
 
-The agent should classify all prompts into three tiers.
+```text
+Use Dageno Content Factory to turn today's highest-priority content opportunity into a new article brief.
+```
 
-### High Opportunity
+```text
+Analyze one Dageno content opportunity by reading the response detail and citation URLs, then recommend the best new content asset to create.
+```
 
-Typical traits:
+```text
+Take the top brand-gap prompt from the last 7 days and generate an SEO + GEO content blueprint.
+```
 
-- very high brand gap
-- very high source gap
-- enough response count to show the gap is stable
-- prompt strongly aligned with product narrative or commercial intent
+## Skill Entry Point
 
-Use this as the default queue.
+The main skill lives here:
 
-### Medium Opportunity
+- [`skills/dageno-content-factory.md`](skills/dageno-content-factory.md)
 
-Typical traits:
+The pipeline reference lives here:
 
-- some real gap exists
-- either demand, stability, or commercial closeness is weaker
+- [`references/pipeline-spec.md`](references/pipeline-spec.md)
 
-Good for the second queue.
-
-### Low Opportunity
-
-Typical traits:
-
-- weaker gap
-- low sample size
-- lower business relevance
-
-Keep visible, but do not prioritize first.
-
-## Main Workflow
+## The Main Workflow
 
 ```mermaid
 flowchart TD
-    A["1. Get content opportunities"] --> B["2. Classify opportunities<br/>High / Medium / Low"]
-    B --> C["3. Select one prompt<br/>default: High first"]
-    C --> D["4. Get prompt profile<br/>topic / volume / intentions / funnel"]
-    C --> E["5. Get responses<br/>sample size and cross-platform evidence"]
-    C --> F["6. Get response detail<br/>how AI is framing the topic"]
-    C --> G["7. Get citation URLs<br/>what sources AI trusts"]
+    A["1. Get Dageno content opportunities<br/>get_content_opportunities"] --> B["2. Select one high-priority prompt<br/>brand gap / source gap / priority"]
+    B --> C["3. Get response detail by prompt<br/>how AI answered"]
+    B --> D["4. List citation URLs<br/>what AI cited"]
 
-    F --> H["8. Response-gap analysis"]
-    G --> I["9. Citation analysis"]
+    B --> E["5. Prompt demand<br/>observed prompt volume for seed prompt"]
+    B --> F["6. Keyword translation<br/>LLM extracts primary keyword"]
+    F --> G["7. Keyword expansion<br/>LLM builds keyword cluster"]
+    G --> H["8. SEO metrics<br/>search volume + KD"]
+    G --> I["9. Dageno-aligned intentions<br/>Transactional / Commercial / Navigational / Informational"]
 
-    C --> J["10. Prompt fanout<br/>keep connector slot ready"]
-    C --> K["11. SEO translation<br/>extract primary keyword"]
-    K --> L["12. Keyword expansion"]
-    L --> M["13. Search Volume + KD"]
-    L --> N["14. Intention mapping"]
+    C --> J["10. Response gap analysis<br/>what AI said / missed / attributed to competitors"]
+    D --> K["11. Citation analysis<br/>what source types AI trusts"]
 
-    D --> O["15. Unified decision object"]
-    E --> O
-    H --> O
-    I --> O
-    J --> O
-    M --> O
-    N --> O
+    E --> L["12. Unified opportunity object"]
+    H --> L
+    I --> L
+    J --> L
+    K --> L
 
-    O --> P["16. Output content pack"]
-    P --> Q["17. Choose next asset to generate"]
-    Q --> R["18. Generate article"]
-    Q --> S["Future branch: generate landing page"]
+    L --> M["13. New-content decision engine<br/>convert one opportunity into one new content task"]
+    M --> N["14. Asset type decision<br/>Pillar / Standard / Lightweight"]
+    N --> O["15. Output SEO + GEO content blueprint<br/>title / H1 / H2 / FAQ / chunks / schema"]
+    O --> P["16. Optional full draft"]
+
+    P --> Q["Future extension<br/>post-publish monitoring and gap re-check"]
 ```
 
-## Why The Order Matters
+## Step By Step
 
-### Evidence first
+### 1. Get content opportunities
 
-The agent should not jump from prompt to article.
+Use Dageno's content-opportunity layer as the starting queue.
 
-It should first confirm:
+Primary source:
 
-- is the gap real
-- is the gap stable
-- how AI is currently framing the topic
-- what source patterns dominate the answer space
+- `get_content_opportunities`
 
-### Fanout before final content selection
+This is the candidate list for new content, not a generic keyword backlog.
 
-Prompt fanout should happen before the final content decision.
+### 2. Select one prompt opportunity
 
-Why:
+Choose the prompt based on:
 
-- one prompt should expand into adjacent prompt opportunities
-- this is how the system creates a content pack instead of a single article
+- priority
+- brand gap
+- source gap
+- platform coverage
 
-### SEO and GEO must merge
+This defines the next new-content task.
 
-The system should not stop at AI-answer evidence.
-It also needs:
+### 3. Read response detail
 
-- keyword translation
-- keyword expansion
-- search volume
-- KD
-- intention
+Use prompt-level response data to inspect how AI is currently answering that prompt.
 
-Only then should it decide what to create.
+Primary source:
 
-## What The Agent Produces
+- `Get response detail by prompt`
 
-The primary output is a **content pack**, not just a draft.
+This step answers:
 
-For one high-opportunity prompt, the pack should include:
+- what narrative AI is using
+- what information is missing
+- which competitors are being framed as relevant
+- what product, category, or use-case language is absent
 
-- selected prompt and opportunity tier
-- prompt profile
-- response-gap summary
-- citation summary
-- fanout prompt set
-- keyword cluster
-- search metrics and intentions
-- recommended asset list
-- recommended order of creation
+### 4. Read citation URLs
 
-Then the user can choose:
+Use citation data to inspect which pages support the current answer.
 
-- article
-- future landing page
-- future supporting asset
+Primary source:
 
-## Future Branches
+- `List citation URLs`
 
-This project should explicitly leave room for:
+This step answers:
 
-### 1. Landing page generation
+- what domains and pages AI trusts
+- what content formats are being cited
+- what evidence structure those cited pages use
 
-Why:
+### 5. Add prompt-side demand
 
-- landing pages are often more direct for SEO conversion and commercial capture
-- the current citation pattern may suggest educational content first, but landing pages should remain a planned branch
+Get the real observed prompt demand for the seed prompt.
 
-### 2. Existing-content refresh
+This is the GEO-side demand signal.
 
-Not the current priority.
-Keep it as a future branch.
+Important:
 
-### 3. Post-publish monitoring loop
+- the seed prompt can have real observed prompt volume
+- fanout prompts currently do not
 
-Also future:
+### 6. Translate the seed prompt into SEO language
+
+Use the model to extract:
+
+- one `primary_keyword`
+- one `keyword_cluster`
+
+This converts AI-native demand into search-native demand.
+
+### 7. Add SEO metrics
+
+Use your SEO connector to enrich the keyword cluster with:
+
+- `search_volume`
+- `keyword_difficulty`
+
+This is the SEO-side demand and competition signal.
+
+### 8. Add Dageno-aligned intentions
+
+Classify each keyword using the Dageno intention model:
+
+- `Transactional`
+- `Commercial`
+- `Navigational`
+- `Informational`
+
+This helps determine the correct asset type and article angle.
+
+### 9. Run response gap analysis
+
+This is a key layer.
+
+The agent should not just observe that a gap exists. It should explain the gap:
+
+- what AI is emphasizing
+- what AI is omitting
+- what competitors are credited for
+- what narrative or evidence your brand lacks in the answer
+
+### 10. Run citation analysis
+
+If the user provides a page-fetch connector such as Jina or Firecrawl:
+
+- fetch cited pages
+- analyze structure, format, framing, and extractability
+
+If not:
+
+- fall back to URL, domain, title, and visible page-type hints
+
+This turns citation data into writing guidance.
+
+### 11. Build one unified opportunity object
+
+The opportunity object should combine:
+
+- prompt demand
+- keyword demand
+- intentions
+- response-gap evidence
+- citation evidence
+
+This becomes the decision input for content generation.
+
+### 12. Make a new-content decision
+
+This skill only considers **new content**.
+
+It does not yet decide whether to update existing pages.
+
+The decision is:
+
+- should this opportunity become a new content asset
+- and if yes, what type
+
+### 13. Choose the asset type
+
+The default asset types are:
+
+- `Pillar`
+- `Standard`
+- `Lightweight`
+
+Use:
+
+- `Pillar` for broad, high-demand, category-shaping opportunities
+- `Standard` for clear standalone article opportunities
+- `Lightweight` for narrower but still valuable content coverage
+
+### 14. Output a content blueprint
+
+The main output should be a structured blueprint:
+
+- title
+- H1
+- H2/H3
+- FAQ
+- chunk plan
+- schema recommendations
+- citation-informed writing notes
+
+### 15. Optionally output a full draft
+
+If the user wants direct production, the skill can continue from blueprint to article draft.
+
+### Future extension
+
+The project should mention, but not depend on, a later monitoring loop:
 
 - publish
-- re-monitor
-- see whether brand gap or source gap shrinks
+- monitor the same prompt again
+- observe whether brand gap or source gap shrinks
+
+## Demand Model
+
+This project uses two demand systems:
+
+| Signal | Meaning | Source |
+|---|---|---|
+| observed prompt volume | real prompt-side demand for the seed prompt | Dageno prompt data |
+| estimated prompt volume | proxy only for fanout prompts when direct prompt data is unavailable | model + keyword proxy |
+| search volume | search demand in SEO language | SEO metrics connector |
+| keyword difficulty | competition in SEO language | SEO metrics connector |
+
+## Intention Model
+
+Align to Dageno's intention structure:
+
+```json
+{
+  "intentions": [
+    {
+      "score": 86,
+      "intention": "Commercial"
+    }
+  ]
+}
+```
+
+Supported values:
+
+- `Transactional`
+- `Commercial`
+- `Navigational`
+- `Informational`
 
 ## Connectors
 
 | Layer | Status | Notes |
 |---|---|---|
-| Dageno content opportunities | ready | source queue |
-| Dageno prompt profile | ready | topic, volume, intentions, funnel |
-| Dageno responses | ready | cross-platform evidence |
-| Dageno response detail | ready | response-gap evidence |
+| Dageno content opportunities | ready | entry point |
+| Dageno response detail | ready | answer-gap evidence |
 | Dageno citation URLs | ready | source evidence |
-| prompt fanout | reserved | connector slot should stay in workflow |
-| SEO search volume / KD | reserved | connector slot should stay in workflow |
-| landing page generation | future branch | keep in architecture |
+| Dageno prompt demand | ready | observed seed prompt volume |
+| SEO metrics | planned | search volume and KD |
+| citation-page fetch | optional | Jina or Firecrawl |
+| SERP enrichment | optional | approved SERP API or user-provided export |
 
-## Recommended Runtime Flow
+## Plan A / Plan B
 
-### 1. Review tiers
+### Plan A
 
-Start by listing:
+Use when the user provides:
 
-- High Opportunity
-- Medium Opportunity
-- Low Opportunity
+- Dageno API access
+- SEO metrics connector
+- Jina or Firecrawl for cited-page fetching
+- optional SERP connector
 
-Default to High first.
+This enables a fuller article blueprint with stronger citation-based guidance.
 
-### 2. Pick a prompt
+### Plan B
 
-If the user does not pick one, use the highest-priority item from the High tier.
+Use when optional connectors are missing.
 
-### 3. Build the evidence layer
+Fallback behavior:
 
-Inspect:
+- still use Dageno opportunity, response detail, and citation URLs
+- still use the model for keyword translation and intention classification
+- skip full page crawling if Jina / Firecrawl is unavailable
+- skip SERP enrichment if no approved source exists
+- still output a new-content blueprint
 
-- prompt profile
-- responses
-- response detail
-- citation URLs
+The workflow should degrade gracefully, not fail.
 
-### 4. Expand the opportunity
+## What The Skill Produces
 
-Run:
+For each selected prompt opportunity, the agent can produce:
 
-- prompt fanout
-- keyword translation
-- keyword expansion
-- SEO metrics
-- intentions
-
-### 5. Output the content pack
-
-Do not collapse everything into one article too early.
+- a normalized opportunity object
+- a response-gap summary
+- a citation summary
+- a keyword cluster with SEO demand and intention labels
+- a new-content recommendation
+- a content blueprint
+- an optional article draft
 
 ## Existing Python Layer
 
-The repo already includes:
+This repo already includes:
 
 - [`src/dageno_mcp_growth_playbook/client.py`](src/dageno_mcp_growth_playbook/client.py)
 - [`src/dageno_mcp_growth_playbook/workflows.py`](src/dageno_mcp_growth_playbook/workflows.py)
 - [`src/dageno_mcp_growth_playbook/cli.py`](src/dageno_mcp_growth_playbook/cli.py)
 
-These stay as the base for:
-
-- Dageno API connectivity
-- live testing
-- future agent workflow extensions
+These remain useful as the API wrapper and workflow base.
 
 ## Quick Start
 
@@ -300,14 +408,40 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 export DAGENO_API_KEY="your-token"
-PYTHONPATH=src python -m dageno_mcp_growth_playbook.cli content-opportunities --days 7
+PYTHONPATH=src python -m dageno_mcp_growth_playbook.cli content-opportunities --days 30
 ```
 
-Run the live new-content brief:
+Run the new-content agent on real Dageno data:
 
 ```bash
-PYTHONPATH=src python -m dageno_mcp_growth_playbook.cli new-content-brief --days 7
+PYTHONPATH=src python -m dageno_mcp_growth_playbook.cli new-content-brief --days 7 --limit 5
 ```
+
+Target one prompt directly:
+
+```bash
+PYTHONPATH=src python -m dageno_mcp_growth_playbook.cli new-content-brief --days 7 --prompt-text "GEO implementation guide for technical teams"
+```
+
+### Install As A Package
+
+```bash
+pip install -e .
+dageno-playbook content-opportunities --days 30
+```
+
+### Use The Skill
+
+Start from:
+
+- [`skills/dageno-content-factory.md`](skills/dageno-content-factory.md)
+
+Recommended runtime inputs:
+
+- `DAGENO_API_KEY`
+- optional SEO metrics API
+- optional Jina or Firecrawl
+- optional SERP connector
 
 ## Repo Structure
 

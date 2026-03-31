@@ -1,3 +1,3 @@
 display_name: Dageno Content Opportunity Agent
-short_description: Turn Dageno prompt opportunities into SEO + GEO content packs.
-default_prompt: Use this skill to classify Dageno opportunities into High, Medium, and Low tiers, analyze one selected prompt with response and citation evidence, run fanout and SEO enrichment, and output a reusable SEO + GEO content pack.
+short_description: Turn Dageno prompt opportunities into new SEO + GEO content briefs.
+default_prompt: Use this skill to analyze one Dageno content opportunity, inspect response detail and citation URLs, add keyword demand and intention data, and output the best new SEO + GEO content blueprint.
