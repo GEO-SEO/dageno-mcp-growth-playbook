@@ -1,3 +1,3 @@
-display_name: Dageno Content Opportunity Agent
-short_description: Turn Dageno prompt opportunities into new SEO + GEO content briefs.
-default_prompt: Use this skill to analyze one Dageno content opportunity, inspect response detail and citation URLs, add keyword demand and intention data, and output the best new SEO + GEO content blueprint.
+display_name: Dageno SEO + GEO Content Factory
+short_description: Turn Dageno prompt opportunities into SEO + GEO content plans and briefs.
+default_prompt: Use this skill to analyze Dageno content opportunities, merge prompt demand and keyword demand, inspect citation sources, and output a prioritized SEO + GEO content blueprint.

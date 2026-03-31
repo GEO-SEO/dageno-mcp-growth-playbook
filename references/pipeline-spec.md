@@ -1,68 +1,27 @@
 # Dageno Content Factory Pipeline Spec
 
-This reference describes the current skill logic:
-
-- start from Dageno content opportunities
-- analyze response detail and citation URLs
-- make a **new-content** decision
-- output an SEO + GEO blueprint or draft
-
-It also notes future extensions without making them required for the current skill.
+This reference keeps the full workflow in one place so the skill can stay concise.
 
 ## Goal
 
-Turn one Dageno content opportunity into one new content asset.
+Turn one Dageno content opportunity into a prioritized SEO + GEO content blueprint.
 
-## Product Framing
+## Data Principles
 
-The system should follow this model:
+### 1. Prompt demand and search demand are different
 
-- `prompt` = monitored opportunity surface
-- `response detail` = evidence of the current AI narrative
-- `citation URLs` = evidence of the sources AI trusts
-- `new content asset` = the output to produce
+- `observed_prompt_volume` is real Dageno prompt data for the seed prompt
+- `estimated_prompt_volume` is a proxy for fanout prompts when real prompt volume is unavailable
+- `search_volume` is SEO demand for keywords
+- `keyword_difficulty` is SEO competition
 
-Do not model the workflow as:
+### 2. Fanout prompt demand must be labeled honestly
 
-- one keyword = one article
-- or one chat = one article
-
-The response detail and citation URLs are evidence inputs, not direct output units.
-
-## Current Scope
-
-Included now:
-
-- choose a content opportunity
-- inspect response detail
-- inspect citation URLs
-- translate prompt to keyword cluster
-- enrich with SEO metrics when available
-- classify intentions
-- choose a new content asset type
-- generate a blueprint or draft
-
-Not included yet:
-
-- existing-content refresh logic
-- content inventory matching
-- post-publish monitoring loop
-
-## Demand Principles
-
-### 1. GEO demand and SEO demand are different
-
-- `observed_prompt_volume` = real prompt demand for the seed prompt from Dageno
-- `estimated_prompt_volume` = proxy demand for fanout prompts when direct prompt data is unavailable
-- `search_volume` = keyword demand from SEO connector
-- `keyword_difficulty` = keyword competition from SEO connector
-
-### 2. Fanout demand must be labeled honestly
-
-If fanout prompts do not have direct prompt data, do not store them as observed prompt volume.
+Do not store estimated fanout demand in the same field as observed prompt demand.
 
 Use:
 
+- `observed_prompt_volume`
 - `estimated_prompt_volume`
 - `volume_estimation_method`
 - `volume_confidence`
@@ -76,7 +35,7 @@ Use:
 - `Navigational`
 - `Informational`
 
-Recommended structure:
+Recommended object:
 
 ```json
 {
@@ -89,106 +48,42 @@ Recommended structure:
 }
 ```
 
-## Main Workflow
+## Pipeline
 
-### Step 1: select one opportunity
+### Step 1: intake
 
 Input:
 
 - `get_content_opportunities`
-
-Selection factors:
-
-- priority
-- brand gap
-- source gap
-- platform spread
 
 Output:
 
 - `opportunity_id`
 - `seed_prompt`
 
-### Step 2: inspect response detail
-
-Input:
-
-- `Get response detail by prompt`
-
-Goal:
-
-- explain how AI currently frames the prompt
-
-Questions to answer:
-
-- what did AI emphasize
-- what did AI omit
-- which competitors were mentioned
-- what claims, product categories, proof points, or use cases were absent
-
-Output:
-
-- `response_gap_summary`
-
-### Step 3: inspect citation URLs
-
-Input:
-
-- `List citation URLs`
-
-Goal:
-
-- explain what sources AI relied on
-
-Preferred mode:
-
-- fetch cited pages with Jina or Firecrawl
-
-Fallback mode:
-
-- infer from domain, URL, title, and page-type hints
-
-Questions to answer:
-
-- what source types were cited
-- what content structure they used
-- what evidence style made them citable
-
-Output:
-
-- `citation_summary`
-
-### Step 4: add prompt-side demand
+### Step 2: prompt-side demand
 
 Input:
 
 - seed prompt
-- Dageno prompt data
-
-Goal:
-
-- record real prompt demand for the seed opportunity
+- Dageno prompt dataset
 
 Output:
 
-- `observed_prompt_volume`
+- observed prompt demand for the seed prompt
 
-### Step 5: translate the prompt into SEO language
+### Step 3: keyword translation
 
 Input:
 
 - seed prompt
 
-Goal:
-
-- create a usable SEO topic model
-
 Output:
 
-- `primary_keyword`
-- `keyword_cluster`
+- primary keyword
+- keyword cluster
 
-### Step 6: add SEO metrics
+### Step 4: SEO metrics
 
 Input:
 
@@ -197,14 +92,10 @@ Input:
 
 Output:
 
-- `search_volume`
-- `keyword_difficulty`
+- search volume
+- keyword difficulty
 
-If unavailable:
-
-- mark metrics as pending and continue
-
-### Step 7: add intentions
+### Step 5: intentions
 
 Input:
 
@@ -212,142 +103,180 @@ Input:
 
 Output:
 
-- keyword-level `intentions`
-- cluster-level `dominant_intention`
+- keyword-level intentions
+- cluster-level dominant intention
 
-### Step 8: build the unified opportunity object
+### Step 6: fanout
 
-Combine:
+Input:
 
-- opportunity metadata
-- response-gap evidence
-- citation evidence
-- prompt demand
-- keyword demand
-- intentions
-
-This object is the input to the final decision engine.
-
-### Step 9: decide the new content asset
-
-Current allowed decisions:
-
-- `Pillar`
-- `Standard`
-- `Lightweight`
-
-This stage does not ask whether an existing page should be updated.
-
-It asks:
-
-- what new asset should be created from this opportunity
-
-### Step 10: generate the blueprint
+- seed prompt
+- future Dageno fanout connector
 
 Output:
 
+- fanout prompts
+- estimated demand only when direct observed prompt data is unavailable
+
+### Step 7: citations
+
+Input:
+
+- prompt-level citation URLs
+
+Output:
+
+- citation URL list
+- optional citation-page analysis
+
+### Step 8: unified data layer
+
+Combine:
+
+- prompt candidates
+- keyword candidates
+- citation URLs
+- cluster aggregates
+
+### Step 9: citation intelligence
+
+Preferred:
+
+- fetch page content with Jina or Firecrawl
+
+Fallback:
+
+- analyze domain, title, URL structure, and known page type hints
+
+Output:
+
+- content-type signals
+- extractability signals
+- citation-informed writing recommendations
+
+### Step 10: SERP intelligence
+
+Plan A:
+
+- use an approved SERP API or user-provided SERP export
+
+Plan B:
+
+- skip or sample SERP analysis
+
+Output:
+
+- ranking-page types
+- PAA signals when available
+- snippet or AI Overview hints when available
+
+### Step 11: decision engine
+
+Use:
+
+- demand
+- intention
+- overlap
+- citation evidence
+- optional SERP evidence
+
+To decide:
+
+- pillar page
+- standard article
+- lightweight article
+- FAQ block
+- GEO chunk pack
+
+### Step 12: blueprint generation
+
+For each asset, output:
+
 - title
 - H1
-- H2/H3
+- H2/H3 structure
 - FAQ
-- citation-informed writing guidance
-- chunk plan
-- schema recommendations
+- evidence requirements
+- chunk packaging
+- schema guidance
 
-### Step 11: optional draft generation
+### Step 13: post-publish loop
 
-If requested, turn the blueprint into a draft.
+Monitor:
 
-## Optional Enhancements
+- GSC
+- AI citation behavior
 
-### Citation page fetching
+Then decide whether to:
 
-Plan A:
-
-- Jina or Firecrawl
-
-Plan B:
-
-- metadata-only citation inference
-
-### SERP enrichment
-
-Plan A:
-
-- approved SERP API or user-provided export
-
-Plan B:
-
-- skip SERP enrichment
-
-SERP is not a hard dependency for the current skill.
-
-## Future Product Extension
-
-Later, this same workflow can be extended into a monitoring loop:
-
-1. publish content
-2. monitor the same prompt again
-3. check whether brand gap or source gap shrinks
-4. decide whether to add more new content or update existing content
-
-That loop is useful product direction, but it is not required for the current skill.
+- keep merged
+- split content
+- add FAQs
+- improve chunks
 
 ## Suggested Unified Data Model
 
 ```json
 {
   "opportunity_id": "opp_001",
-  "seed_prompt": "GEO implementation guide for technical teams",
+  "seed_prompt": "how to automate contract signing with ai",
   "source": "dageno:get_content_opportunities",
-  "prompt_snapshot": {
-    "priority": "high",
-    "brand_gap": 100,
-    "source_gap": 100
-  },
-  "response_gap_summary": {
-    "competitors_mentioned": ["CSP"],
-    "brand_missing": true,
-    "missing_angles": [
-      "brand-specific implementation narrative",
-      "enterprise monitoring use case",
-      "proof-oriented product framing"
-    ]
-  },
-  "citation_summary": {
-    "citation_urls": [
-      "https://example.com/guide"
-    ],
-    "common_source_types": [
-      "guide",
-      "blog post"
-    ]
-  },
-  "prompt_demand": {
-    "observed_prompt_volume": 820
-  },
+  "market": "global",
+  "language": "en",
+  "created_at": "2026-03-31T10:30:00+08:00",
+  "prompt_candidates": [
+    {
+      "prompt": "how to automate contract signing with ai",
+      "role": "seed",
+      "observed_prompt_volume": 820,
+      "estimated_prompt_volume": null,
+      "volume_confidence": "high"
+    },
+    {
+      "prompt": "how to send contracts with ai",
+      "role": "fanout",
+      "observed_prompt_volume": null,
+      "estimated_prompt_volume": 180,
+      "volume_estimation_method": "keyword_proxy",
+      "volume_confidence": "low"
+    }
+  ],
   "keyword_candidates": [
     {
-      "keyword": "geo implementation guide",
+      "keyword": "ai contract automation",
       "role": "primary",
       "search_volume": 1200,
       "keyword_difficulty": 28,
       "intentions": [
         {
-          "score": 82,
-          "intention": "Informational"
-        },
+          "score": 86,
+          "intention": "Commercial"
+        }
+      ]
+    },
+    {
+      "keyword": "contract signing automation",
+      "role": "secondary",
+      "search_volume": 700,
+      "keyword_difficulty": 21,
+      "intentions": [
         {
-          "score": 18,
+          "score": 74,
           "intention": "Commercial"
         }
       ]
     }
   ],
+  "citation_urls": [
+    "https://example.com/guide"
+  ],
   "aggregates": {
-    "primary_keyword": "geo implementation guide",
-    "dominant_intention": "Informational",
-    "recommended_asset_type": "Standard"
+    "seed_prompt_volume": 820,
+    "fanout_estimated_volume_total": 180,
+    "combined_prompt_demand_score": 1000,
+    "total_search_volume": 1900,
+    "dominant_intention": "Commercial",
+    "primary_keyword": "ai contract automation"
   }
 }
 ```

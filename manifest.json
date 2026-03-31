@@ -1,8 +1,8 @@
 {
   "name": "dageno-mcp-growth-playbook",
-  "version": "0.3.0",
-  "display_name": "Dageno Content Opportunity Agent",
-  "description": "Turn Dageno content opportunities into new SEO + GEO content briefs by analyzing response gaps, citation URLs, keyword demand, and intent.",
+  "version": "0.2.0",
+  "display_name": "Dageno SEO + GEO Content Factory",
+  "description": "Turn Dageno content opportunities into SEO + GEO content plans with prompt demand, keyword demand, citation intelligence, fallback-safe SERP enrichment, and publish-ready briefs.",
   "author": {
     "name": "GEO-SEO",
     "website": "https://github.com/GEO-SEO/dageno-mcp-growth-playbook"
@@ -11,9 +11,7 @@
     "dageno",
     "seo",
     "geo",
-    "content-opportunity",
     "content-strategy",
-    "response-gap",
     "citation-intelligence",
     "keyword-research",
     "prompt-research",
@@ -56,6 +54,6 @@
     "skill_type": "content-workflow",
     "network_access": "optional",
     "minimum_permissions": "Dageno API access required; SEO metrics, page fetch, and SERP enrichment are optional connectors.",
-    "data_access_policy": "This skill is optimized for new-content generation from Dageno opportunities. Do not assume hidden access to private search APIs, page crawlers, or Google scraping. Fall back to Dageno response and citation inputs plus user-provided connectors when optional systems are missing."
+    "data_access_policy": "Do not assume hidden access to private search APIs, page crawlers, or Google scraping. Fall back to Dageno-only and user-provided inputs when optional connectors are missing."
   }
 }
