@@ -1,8 +1,8 @@
 {
   "name": "dageno-mcp-growth-playbook",
   "version": "0.4.0",
-  "display_name": "Dageno Content Opportunity Agent",
-  "description": "Turn Dageno content opportunities into SEO + GEO content packs by combining response evidence, citation evidence, prompt fanout, keyword demand, and structured asset decisions.",
+  "display_name": "GEO Content Opportunity Engine",
+  "description": "Turn Dageno GEO opportunity data into content packs by combining response evidence, citation evidence, prompt fanout, keyword demand, and structured asset decisions.",
   "author": {
     "name": "GEO-SEO",
     "website": "https://github.com/GEO-SEO/dageno-mcp-growth-playbook"
