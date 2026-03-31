@@ -26,6 +26,23 @@ def _fmt_number(value: Any, digits: int = 2) -> str:
     return str(value)
 
 
+def _normalize_gap_score(value: Any) -> float:
+    if value is None:
+        return 0.0
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        return 0.0
+    return numeric * 100 if 0 <= numeric <= 1 else numeric
+
+
+def _fmt_gap(value: Any) -> str:
+    normalized = _normalize_gap_score(value)
+    if normalized == int(normalized):
+        return f"{int(normalized)}%"
+    return f"{normalized:.2f}%"
+
+
 def _top(items: Iterable[Dict[str, Any]], key: str, limit: int) -> List[Dict[str, Any]]:
     return sorted(items, key=lambda item: item.get(key) or 0, reverse=True)[:limit]
 
@@ -81,8 +98,8 @@ def _choose_asset_type(
     response_count: float | int | None,
 ) -> str:
     pv = prompt_volume or 0
-    bg = brand_gap or 0
-    sg = source_gap or 0
+    bg = _normalize_gap_score(brand_gap)
+    sg = _normalize_gap_score(source_gap)
     rc = response_count or 0
     if (bg >= 80 and sg >= 60) or (pv >= 20 and rc >= 20):
         return "Pillar"
@@ -96,8 +113,10 @@ def _format_intentions(intentions: List[Dict[str, Any]]) -> str:
         return "-"
     bits = []
     for item in intentions:
-        intention = item.get("intention", "-")
+        intention = item.get("intention") or item.get("i") or "-"
         score = item.get("score")
+        if score is None:
+            score = item.get("s")
         bits.append(f"{intention} ({score})" if score is not None else intention)
     return ", ".join(bits)
 
@@ -481,8 +500,8 @@ def new_content_brief(
         f"- Prompt: `{selected.get('prompt', '-')}`",
         f"- Topic: `{selected.get('topic', '-')}`",
         f"- Prompt ID: `{selected_prompt_id or '-'}`",
-        f"- Brand Gap: `{_fmt_number(selected.get('brandGap'))}`",
-        f"- Source Gap: `{_fmt_number(selected.get('sourceGap'))}`",
+        f"- Brand Gap: `{_fmt_gap(selected.get('brandGap'))}`",
+        f"- Source Gap: `{_fmt_gap(selected.get('sourceGap'))}`",
         f"- Responses: `{_fmt_number(selected.get('totalResponseCount'))}`",
         f"- Sources: `{_fmt_number(selected.get('totalSourceCount'))}`",
         f"- Platforms: {', '.join(selected.get('platforms', [])[:6]) or '-'}",
@@ -535,7 +554,7 @@ def new_content_brief(
             "",
             f"- Asset Type: `{asset_type}`",
             "- Reasoning:",
-            f"  High-level gap signal comes from brand gap `{_fmt_number(selected.get('brandGap'))}` and source gap `{_fmt_number(selected.get('sourceGap'))}`.",
+            f"  High-level gap signal comes from brand gap `{_fmt_gap(selected.get('brandGap'))}` and source gap `{_fmt_gap(selected.get('sourceGap'))}`.",
             f"  Demand signal comes from observed prompt volume `{_fmt_number(prompt_volume)}` and response count `{_fmt_number(selected.get('totalResponseCount'))}`.",
             "",
             "## Drafting Angles",
