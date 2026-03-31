@@ -8,6 +8,7 @@ from .workflows import (
     brand_snapshot,
     citation_source_brief,
     community_opportunity_brief,
+    content_pack,
     content_opportunity_brief,
     new_content_brief,
     prompt_deep_dive,
@@ -35,6 +36,13 @@ def build_parser() -> argparse.ArgumentParser:
     subparsers.add_parser("backlink-opportunities", parents=[common], help="List top backlink opportunities")
     subparsers.add_parser("community-opportunities", parents=[common], help="List top community opportunities")
     subparsers.add_parser("weekly-brief", parents=[common], help="Generate a combined executive brief")
+    content_pack_parser = subparsers.add_parser(
+        "content-pack",
+        parents=[common],
+        help="Turn one Dageno opportunity into a reusable content pack",
+    )
+    content_pack_parser.add_argument("--prompt-id", default=None, help="Optional prompt ID to target")
+    content_pack_parser.add_argument("--prompt-text", default=None, help="Optional prompt text to target")
     new_content_parser = subparsers.add_parser(
         "new-content-brief",
         parents=[common],
@@ -69,6 +77,16 @@ def main() -> None:
         print(backlink_opportunity_brief(client, days=args.days, limit=args.limit))
     elif args.command == "community-opportunities":
         print(community_opportunity_brief(client, days=args.days, limit=args.limit))
+    elif args.command == "content-pack":
+        print(
+            content_pack(
+                client,
+                days=args.days,
+                limit=args.limit,
+                prompt_id=args.prompt_id,
+                prompt_text=args.prompt_text,
+            )
+        )
     elif args.command == "new-content-brief":
         print(
             new_content_brief(
