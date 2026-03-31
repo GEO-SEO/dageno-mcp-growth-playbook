@@ -203,20 +203,16 @@ class DagenoClient:
         *,
         page: int = 1,
         page_size: int = 50,
-        prompt_id: Optional[str] = None,
     ) -> Dict[str, Any]:
-        params: Dict[str, Any] = {
-            "startAt": start_at,
-            "endAt": end_at,
-            "page": page,
-            "pageSize": page_size,
-        }
-        if prompt_id:
-            params["promptId"] = prompt_id
         return self._request(
             "GET",
             "/v1/open-api/opportunities/content",
-            params=params,
+            params={
+                "startAt": start_at,
+                "endAt": end_at,
+                "page": page,
+                "pageSize": page_size,
+            },
         )
 
     def backlink_opportunities(
@@ -256,3 +252,4 @@ class DagenoClient:
                 "pageSize": page_size,
             },
         )
+

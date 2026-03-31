@@ -9,7 +9,6 @@ from .workflows import (
     citation_source_brief,
     community_opportunity_brief,
     content_opportunity_brief,
-    new_content_brief,
     prompt_deep_dive,
     prompt_gap_report,
     topic_watchlist,
@@ -35,13 +34,6 @@ def build_parser() -> argparse.ArgumentParser:
     subparsers.add_parser("backlink-opportunities", parents=[common], help="List top backlink opportunities")
     subparsers.add_parser("community-opportunities", parents=[common], help="List top community opportunities")
     subparsers.add_parser("weekly-brief", parents=[common], help="Generate a combined executive brief")
-    new_content_parser = subparsers.add_parser(
-        "new-content-brief",
-        parents=[common],
-        help="Turn one real content opportunity into a new-content brief",
-    )
-    new_content_parser.add_argument("--prompt-id", default=None, help="Optional prompt ID to target")
-    new_content_parser.add_argument("--prompt-text", default=None, help="Optional prompt text to target")
 
     prompt_parser = subparsers.add_parser("prompt-deep-dive", parents=[common], help="Inspect one prompt in detail")
     prompt_parser.add_argument("prompt_id", help="Prompt ID from the prompts endpoint")
@@ -69,16 +61,6 @@ def main() -> None:
         print(backlink_opportunity_brief(client, days=args.days, limit=args.limit))
     elif args.command == "community-opportunities":
         print(community_opportunity_brief(client, days=args.days, limit=args.limit))
-    elif args.command == "new-content-brief":
-        print(
-            new_content_brief(
-                client,
-                days=args.days,
-                limit=args.limit,
-                prompt_id=args.prompt_id,
-                prompt_text=args.prompt_text,
-            )
-        )
     elif args.command == "prompt-deep-dive":
         print(prompt_deep_dive(client, prompt_id=args.prompt_id, days=args.days, limit=args.limit))
     elif args.command == "weekly-brief":

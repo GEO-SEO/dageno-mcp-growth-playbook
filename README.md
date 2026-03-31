@@ -411,18 +411,6 @@ export DAGENO_API_KEY="your-token"
 PYTHONPATH=src python -m dageno_mcp_growth_playbook.cli content-opportunities --days 30
 ```
 
-Run the new-content agent on real Dageno data:
-
-```bash
-PYTHONPATH=src python -m dageno_mcp_growth_playbook.cli new-content-brief --days 7 --limit 5
-```
-
-Target one prompt directly:
-
-```bash
-PYTHONPATH=src python -m dageno_mcp_growth_playbook.cli new-content-brief --days 7 --prompt-text "GEO implementation guide for technical teams"
-```
-
 ### Install As A Package
 
 ```bash
