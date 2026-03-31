@@ -200,6 +200,112 @@ Then the user can choose:
 - future landing page
 - future supporting asset
 
+## Recommended Asset List Schema
+
+The core of the content pack should be a structured `Recommended Asset List`.
+
+Do not output this as loose bullets only.
+Treat it as a fixed table so it can feed:
+
+- recurring tasks
+- agent pipelines
+- editorial planning
+- publishing workflows
+
+Suggested columns:
+
+| Column | Meaning |
+|---|---|
+| `asset_id` | unique row id |
+| `source_prompt` | the seed prompt this asset comes from |
+| `opportunity_tier` | High / Medium / Low |
+| `asset_title` | recommended title |
+| `asset_type` | article / landing_page / docs / comparison / community |
+| `recommended_publish_surface` | where this asset should be published |
+| `target_intent` | Transactional / Commercial / Informational / Navigational |
+| `primary_angle` | the main angle of the asset |
+| `why_exists` | why this asset should exist |
+| `derived_from` | what data signals produced this asset idea |
+| `writing_inputs` | what data should be used while writing |
+| `priority` | high / medium / low |
+| `status` | planned / queued / writing / published |
+| `notes` | optional execution notes |
+
+### Recommended Publish Surface
+
+`recommended_publish_surface` should be inferred from citation patterns and asset intent.
+
+Examples:
+
+- `website_blog`
+- `landing_page`
+- `docs_page`
+- `comparison_page`
+- `community_post`
+- `third_party_article`
+
+Basic rule:
+
+- if `Article` dominates, prefer `website_blog`
+- if `Listicle` dominates, prefer `website_blog` or `third_party_article`
+- if `Homepage / Product Page / Category Page` dominates, keep `landing_page` or `comparison_page` open
+- if `Discussion` dominates, consider `community_post`
+
+### Derived From
+
+`derived_from` should not be vague.
+It should use normalized signals such as:
+
+- `high_brand_gap`
+- `high_source_gap`
+- `repeated_response_framing`
+- `dominant_article_citations`
+- `dominant_listicle_citations`
+- `fanout_prompt_cluster`
+- `high_transactional_intent`
+- `keyword_search_demand`
+
+### Writing Inputs
+
+`writing_inputs` should explicitly list which data the writer or agent should use.
+
+Examples:
+
+- `top_response_details`
+- `top_citation_urls`
+- `top_entities_in_mentions`
+- `fanout_prompt_set`
+- `keyword_cluster`
+- `search_volume_and_kd`
+- `dageno_product_positioning`
+
+## GEO Writing Guidance
+
+When the agent turns one row from the content pack into a written asset, it should follow a consistent GEO writing standard.
+
+### Core rules
+
+1. Start definition-first.
+2. Make each H2 independently understandable.
+3. Put the answer before the explanation.
+4. Keep one main idea per paragraph.
+5. Prefer lists, tables, steps, and comparisons when useful.
+6. Make entities, product names, and capabilities explicit.
+7. Use FAQ as an extraction layer, not as filler.
+8. Write content that can function both as an article and as an answer source.
+
+### Practical output pattern
+
+Each written GEO asset should aim to include:
+
+- a short definition-led opening
+- context-independent H2 sections
+- short answer-led paragraphs
+- at least one structured block such as a list or table
+- a FAQ block
+- evidence-backed claims where possible
+- extractable chunk-friendly sections
+
 ## Future Branches
 
 This project should explicitly leave room for:
