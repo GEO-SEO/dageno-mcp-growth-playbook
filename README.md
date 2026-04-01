@@ -217,6 +217,8 @@ This repo ships with simple, readable workflows that map directly to real GEO ex
 | content opportunity brief | content priority queue | `dageno-playbook content-opportunities --days 30` |
 | backlink opportunity brief | backlink target list | `dageno-playbook backlink-opportunities --days 30` |
 | community opportunity brief | community distribution queue | `dageno-playbook community-opportunities --days 30` |
+| query fanout brief | prompt adjacency / fanout view | `dageno-playbook query-fanout <prompt_id> --days 7` |
+| keyword volume brief | keyword volume lookup | `dageno-playbook keyword-volume "keyword one" "keyword two"` |
 | prompt deep dive | prompt-level response and source breakdown | `dageno-playbook prompt-deep-dive <prompt_id>` |
 | weekly exec brief | one combined report | `dageno-playbook weekly-brief --days 30` |
 
@@ -238,6 +240,18 @@ Package install:
 ```bash
 pip install -e .
 dageno-playbook weekly-brief --days 30
+```
+
+Inspect prompt fanout:
+
+```bash
+dageno-playbook query-fanout 673c9c68-b400-4cab-ae78-66925f06eab3 --days 7
+```
+
+Check keyword volume:
+
+```bash
+dageno-playbook keyword-volume "answer engine optimization tools" "enterprise aeo solutions"
 ```
 
 ### MCP Setup
@@ -280,6 +294,14 @@ What content opportunities are available for the current project? Please rank th
 
 ```text
 Please analyze the most frequently cited domains and page URLs over the past month, and summarize the key source patterns.
+```
+
+```text
+Please inspect the query fanout around one high-value prompt and summarize the adjacent demand patterns.
+```
+
+```text
+Please look up keyword volume for a shortlist of AEO- and GEO-related phrases and compare them.
 ```
 
 ## Why This Repo Works As A Growth Asset

@@ -9,8 +9,10 @@ from .workflows import (
     citation_source_brief,
     community_opportunity_brief,
     content_opportunity_brief,
+    keyword_volume_brief,
     prompt_deep_dive,
     prompt_gap_report,
+    query_fanout_brief,
     topic_watchlist,
     weekly_exec_brief,
 )
@@ -34,6 +36,12 @@ def build_parser() -> argparse.ArgumentParser:
     subparsers.add_parser("backlink-opportunities", parents=[common], help="List top backlink opportunities")
     subparsers.add_parser("community-opportunities", parents=[common], help="List top community opportunities")
     subparsers.add_parser("weekly-brief", parents=[common], help="Generate a combined executive brief")
+    fanout_parser = subparsers.add_parser("query-fanout", parents=[common], help="Inspect query fanout for one prompt")
+    fanout_parser.add_argument("prompt_id", help="Prompt ID from the prompts endpoint")
+    fanout_parser.add_argument("--fanout-limit", type=int, default=10, help="How many fanout rows to show")
+
+    keyword_parser = subparsers.add_parser("keyword-volume", parents=[common], help="Get keyword volume for one or more keywords")
+    keyword_parser.add_argument("keywords", nargs="+", help="One or more keywords")
 
     prompt_parser = subparsers.add_parser("prompt-deep-dive", parents=[common], help="Inspect one prompt in detail")
     prompt_parser.add_argument("prompt_id", help="Prompt ID from the prompts endpoint")
@@ -61,6 +69,10 @@ def main() -> None:
         print(backlink_opportunity_brief(client, days=args.days, limit=args.limit))
     elif args.command == "community-opportunities":
         print(community_opportunity_brief(client, days=args.days, limit=args.limit))
+    elif args.command == "query-fanout":
+        print(query_fanout_brief(client, prompt_id=args.prompt_id, days=args.days, limit=args.fanout_limit))
+    elif args.command == "keyword-volume":
+        print(keyword_volume_brief(client, keywords=args.keywords))
     elif args.command == "prompt-deep-dive":
         print(prompt_deep_dive(client, prompt_id=args.prompt_id, days=args.days, limit=args.limit))
     elif args.command == "weekly-brief":

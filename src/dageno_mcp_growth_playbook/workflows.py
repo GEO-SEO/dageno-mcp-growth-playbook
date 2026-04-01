@@ -29,6 +29,21 @@ def _top(items: Iterable[Dict[str, Any]], key: str, limit: int) -> List[Dict[str
     return sorted(items, key=lambda item: item.get(key) or 0, reverse=True)[:limit]
 
 
+def _collect_all(fetch_page, *, page_size: int = 100, max_pages: int = 20) -> List[Dict[str, Any]]:
+    items: List[Dict[str, Any]] = []
+    page = 1
+    while page <= max_pages:
+        resp = fetch_page(page=page, page_size=page_size)
+        page_items = resp.get("data", {}).get("items", [])
+        items.extend(page_items)
+        pagination = resp.get("meta", {}).get("pagination", {})
+        total_pages = pagination.get("totalPages", page)
+        if page >= total_pages or not page_items:
+            break
+        page += 1
+    return items
+
+
 def brand_snapshot(client: DagenoClient) -> str:
     payload = client.brand_info()["data"]
     socials = ", ".join(social["url"] for social in payload.get("socials", [])[:3]) or "-"
@@ -290,3 +305,50 @@ def weekly_exec_brief(client: DagenoClient, days: int = 30, limit: int = 5) -> s
     ]
     return "\n\n".join(sections)
 
+
+def query_fanout_brief(client: DagenoClient, prompt_id: str, days: int = 30, limit: int = 10) -> str:
+    start_at, end_at = date_window(days)
+    items = _collect_all(
+        lambda **kwargs: client.prompt_query_fanout(prompt_id, start_at, end_at, **kwargs),
+        page_size=max(limit, 50),
+    )
+    lines = [
+        f"# Query Fanout Brief ({days} days)",
+        "",
+        f"- Prompt ID: `{prompt_id}`",
+        f"- Total Fanout Queries: `{len(items)}`",
+        "",
+        "| Query | Count | Internal Share |",
+        "|---|---:|---:|",
+    ]
+    for item in items[:limit]:
+        lines.append(
+            "| {name} | {count} | {share} |".format(
+                name=item.get("name", "-"),
+                count=_fmt_number(item.get("count")),
+                share=_fmt_number(item.get("internalShare")),
+            )
+        )
+    return "\n".join(lines)
+
+
+def keyword_volume_brief(client: DagenoClient, keywords: List[str]) -> str:
+    rows = client.keyword_volume(keywords).get("data", [])
+    lines = [
+        "# Keyword Volume Brief",
+        "",
+        "| Keyword | Volume | Competition | CPC |",
+        "|---|---:|---:|---:|",
+    ]
+    for item in rows:
+        cpc = item.get("cpc") or {}
+        lines.append(
+            "| {keyword} | {vol} | {competition} | {currency}{value} |".format(
+                keyword=item.get("keyword", "-"),
+                vol=_fmt_number(item.get("vol")),
+                competition=_fmt_number(item.get("competition")),
+                currency=cpc.get("currency", ""),
+                value=cpc.get("value", "-"),
+            )
+        )
+    return "\n".join(lines)
