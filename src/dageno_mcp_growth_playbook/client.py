@@ -118,6 +118,33 @@ class DagenoClient:
             f"/v1/open-api/prompts/{prompt_id}/responses/{response_id}",
         )
 
+    def prompt_query_fanout(
+        self,
+        prompt_id: str,
+        start_at: str,
+        end_at: str,
+        *,
+        page: int = 1,
+        page_size: int = 50,
+        platforms: Optional[str] = None,
+        regions: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        params: Dict[str, Any] = {
+            "startAt": start_at,
+            "endAt": end_at,
+            "page": page,
+            "pageSize": page_size,
+        }
+        if platforms:
+            params["platforms"] = platforms
+        if regions:
+            params["regions"] = regions
+        return self._request(
+            "GET",
+            f"/v1/open-api/prompts/{prompt_id}/query_fanout",
+            params=params,
+        )
+
     def citation_domains(
         self,
         start_at: str,
@@ -253,3 +280,9 @@ class DagenoClient:
             },
         )
 
+    def keyword_volume(self, keywords: list[str]) -> Dict[str, Any]:
+        return self._request(
+            "POST",
+            "/v1/open-api/keywords/volume",
+            json={"keywords": keywords},
+        )

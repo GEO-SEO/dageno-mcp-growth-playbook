@@ -110,6 +110,36 @@ The Dageno MCP / Open API exposes data across these layers:
 | Opportunities | content, backlink, community | turn monitoring into execution queues |
 | GEO Analysis | ranking, trend, matrix, distribution, correlation | build dashboards and strategic reports |
 
+## Current API Coverage
+
+This repo is the base wrapper and workflow layer, not the full content engine.
+
+Below is the current implementation status in this repository:
+
+| API Area | Status | Notes |
+|---|---|---|
+| Brand info | Implemented | wrapped in `DagenoClient.brand_info()` |
+| GEO analysis | Implemented | wrapped in `DagenoClient.geo_analysis()` |
+| Topics | Implemented | wrapped in `DagenoClient.topics()` |
+| Prompts | Implemented | wrapped in `DagenoClient.prompts()` |
+| Prompt responses | Implemented | list + detail are both wrapped |
+| Citation domains / URLs | Implemented | global and prompt-level endpoints are wrapped |
+| Content / backlink / community opportunities | Implemented | wrapped and exposed in workflows |
+| Query fanout by prompt | Implemented | wrapped in `DagenoClient.prompt_query_fanout()` |
+| Keyword volume | Implemented | wrapped in `DagenoClient.keyword_volume()` |
+| Content-pack generation | Not in this repo | moved to the separate content project |
+| GEO-first article generation | Not in this repo | moved to the separate content project |
+
+If you want:
+
+- opportunity tiering
+- content packs
+- asset tables
+- GEO writing guidance
+- article or landing-page generation
+
+use the separate content project instead of this base wrapper repo.
+
 ## Data Export Map
 
 ![Dageno Export Map](assets/data-map-v3.png)
